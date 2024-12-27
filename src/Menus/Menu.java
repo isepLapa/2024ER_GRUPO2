@@ -1,11 +1,15 @@
 package Menus;
 
 
+import Gerenciamento.Livro;
+import Gerenciamento.Utente;
+
 import java.util.Scanner;
 
 // Classe Menu corrigida e funcional
 public class Menu {
     Gerenciamento.Utentes gerenciamentoUtentes = new Gerenciamento.Utentes();
+    Gerenciamento.Livros gerenciamentoLivros = new Gerenciamento.Livros();
     public void inicio() {
         int op = 0;
         Scanner sc = new Scanner(System.in);
@@ -58,7 +62,8 @@ public class Menu {
 
     public void submenu(String titulo) {
         int op = 0;
-        Gerenciamento.Utente utenteObj = null; // Inicialmente nenhum utente é definido
+        Utente utenteObj = null; // Inicialmente nenhum utente é definido
+        Livro livroObj = null;
 
         Scanner sc = new Scanner(System.in);
 
@@ -94,21 +99,48 @@ public class Menu {
                         System.out.print("Introduza o contacto: ");
                         String contactoTemp = sc.nextLine();
 
-                        utenteObj = new Gerenciamento.Utente(nomeTemp, nifTemp, generoTemp, contactoTemp);
+                        utenteObj = new Utente(nomeTemp, nifTemp, generoTemp, contactoTemp);
                         gerenciamentoUtentes.adicionarUtente(utenteObj);
+
+                    } else if ("Livros".equalsIgnoreCase(titulo)) {
+                        System.out.println("Introduza o Titulo: ");
+                        String tituloTemp = sc.nextLine();
+                        System.out.println("Introduza a editora: ");
+                        String editoraTemp = sc.nextLine();
+                        System.out.println("Introduza a Categoria: ");
+                        String categoriaTemp = sc.nextLine();
+                        System.out.println("Introduza o Ano de Edição: ");
+                        String anoDeEdicaoTemp = sc.nextLine();
+                        System.out.println("Introduza o ISBN: ");
+                        String isbnTemp = sc.nextLine();
+                        System.out.println("Introduza o Autor:");
+                        String autorTemp = sc.nextLine();
+
+                        livroObj = new Livro(tituloTemp, editoraTemp, categoriaTemp,anoDeEdicaoTemp,isbnTemp, autorTemp);
+                        gerenciamentoLivros.adicionarLivro(livroObj);
+
                     } else {
                         System.out.println("Função não implementada para " + titulo + ".");
                     }
                     break;
 
                 case 2:
-                    gerenciamentoUtentes.removerUtente();
+                    if ("Utentes".equalsIgnoreCase(titulo)) {
+                        gerenciamentoUtentes.removerUtente();
+                    } else if ("Livros".equalsIgnoreCase(titulo)) {
+                        gerenciamentoLivros.removerLivro();
+                    }
+
 
                     break;
 
                 case 3:
                     System.out.println("Mostrar " + titulo + " selecionado.");
-                    gerenciamentoUtentes.listarUtentes();
+                    if ("Utentes".equalsIgnoreCase(titulo)) {
+                        gerenciamentoUtentes.listarUtentes();
+                    } else if ("Livros".equalsIgnoreCase(titulo)) {
+                        gerenciamentoLivros.listarLivro();
+                    }
 
                     /*if (utenteObj != null && "Utentes".equalsIgnoreCase(titulo)) {
                         System.out.println("Detalhes do Gerenciamento.Utente:");
@@ -133,7 +165,8 @@ public class Menu {
                         System.out.print("Introduza o novo contacto: ");
                         utenteObj.setContacto(sc.nextLine());
                         System.out.println("Gerenciamento.Utente alterado com sucesso!");
-                    } else {
+
+                    }  else {
                         System.out.println("Nenhum " + titulo + " foi adicionado ainda.");
                     }
                     break;

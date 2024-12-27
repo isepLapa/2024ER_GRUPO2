@@ -1,16 +1,20 @@
 package Gerenciamento;
 
+import java.util.Scanner;
+
 public class Utente {
     private String nif;
     private String nome;
     private String genero;
     private String contacto;
-    // RESOLVER ISSO !!!!!!!
-    public Utente(String nome, String nif, String genero, String contacto) {
-        if (!nifValido(nif)) {
-            System.out.println("NIF inválido!");
-            //nifTemp1.getNif();
+    Scanner sc = new Scanner(System.in);
 
+    public Utente(String nome, String nif,
+                  String genero, String contacto) {
+        while (!nifValido(nif)) {
+            System.out.println("ensira o NIF novamente : ");
+            nif = sc.next();
+            setNif(nif);
         }
         this.nome = nome;
         this.nif = nif;
@@ -27,7 +31,7 @@ public class Utente {
 
     public void setNif(String nif) {
         if (!nifValido(nif)) {
-            throw new IllegalArgumentException("NIF inválido!");
+            System.out.println("NIF inválido!");
         }
         this.nif = nif;
     }
