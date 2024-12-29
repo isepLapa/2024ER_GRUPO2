@@ -1,16 +1,34 @@
 package Menus;
 
 
+import Gerenciamento.Biblioteca;
+import Storage.Storage;
+
 import java.util.Scanner;
 
 // Classe Menu corrigida e funcional
 public class Menu {
     Gerenciamento.Utentes gerenciamentoUtentes = new Gerenciamento.Utentes();
-    public void inicio() {
+    private Storage storage;
+
+    public Menu(Storage storage) {
+        this.storage = storage;
+    }
+
+    public void inicio(String nomeBiblioteca) {
+        Biblioteca biblioteca = new Biblioteca(nomeBiblioteca, storage);
         int op = 0;
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         do {
+            System.out.println("-------------------------------------");
+            System.out.println("      GERINDO BIBLIOTECA: " + nomeBiblioteca);
+            System.out.println("-------------------------------------");
+
+
             System.out.println("\nEscolha uma opção:");
             System.out.println("1 - Livros");
             System.out.println("2 - Jornais/Revistas");
@@ -31,7 +49,7 @@ public class Menu {
 
             switch (op) {
                 case 1:
-                    submenu("Livros");
+                    new MenuLivros();
                     break;
                 case 2:
                     submenu("Jornais/Revistas");
@@ -146,5 +164,9 @@ public class Menu {
                     System.out.println("Opção inválida! Por favor, escolha entre 1 e 5.");
             }
         } while (op != 5);
+    }
+
+    private void livrosMenu() {
+        System.out.println("Livros selecionado.");
     }
 }
