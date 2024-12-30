@@ -9,7 +9,7 @@ public class MenuUtentes {
     }
 
 
-    public void Menu() {
+    private void Menu() {
         System.out.println("Menu Utentes");
 
         int op = 0;

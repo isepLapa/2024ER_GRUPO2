@@ -9,7 +9,7 @@ public class MenuJornaisRevistas {
     }
 
 
-    public void Menu() {
+    private void Menu() {
         System.out.println("Menu Jornais e Revistas");
 
         int op = 0;
