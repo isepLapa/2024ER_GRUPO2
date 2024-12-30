@@ -1,10 +1,14 @@
 package Menus;
 
+import Gerenciamento.Biblioteca;
+
 import java.util.Scanner;
 
 public class MenuLivros {
+    private final Biblioteca biblioteca;
 
-    public MenuLivros() {
+    public MenuLivros(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
         this.Menu();
     }
 
@@ -36,7 +40,7 @@ public class MenuLivros {
 
             switch (op) {
                 case 1:
-
+                    biblioteca.livros.ListarLivros();
                     break;
                 case 2:
 

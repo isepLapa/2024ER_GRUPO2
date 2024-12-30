@@ -40,7 +40,6 @@ public class Storage {
         }
     }
 
-
     private List<String> GetBibliotecas() {
         List<String> bibliotecas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader("bibliotecas.txt"))) {

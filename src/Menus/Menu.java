@@ -51,19 +51,19 @@ public class Menu {
 
             switch (op) {
                 case 1:
-                    new MenuLivros();
+                    new MenuLivros(biblioteca);
                     break;
                 case 2:
-                    new MenuJornaisRevistas();
+                    new MenuJornaisRevistas(biblioteca);
                     break;
                 case 3:
-                    new MenuUtentes();
+                    new MenuUtentes(biblioteca);
                     break;
                 case 4:
-                    new MenuEmprestimos();
+                    new MenuEmprestimos(biblioteca);
                     break;
                 case 5:
-                    new MenuReservar();
+                    new MenuReservar(biblioteca);
                     break;
                 case 6:
                     System.out.println("Saindo do programa. Até logo!");

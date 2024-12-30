@@ -14,8 +14,20 @@ public class Livros{
         this.storage = storage;
     }
 
+    public void ListarLivros() {
+        List<String> livros = this.getLivros();
 
-    public List<String> getLivros() {
+        if (livros.isEmpty()) {
+            System.out.println("Não existem livros na biblioteca " + this.biblioteca);
+            return;
+        }
+
+        for (String livro : livros) {
+            System.out.println(livro);
+        }
+    }
+
+    private List<String> getLivros() {
         return storage.get(Path.of(this.biblioteca + "/livros.txt"));
     }
 }

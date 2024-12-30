@@ -1,10 +1,14 @@
 package Menus;
 
+import Gerenciamento.Biblioteca;
+
 import java.util.Scanner;
 
 public class MenuJornaisRevistas {
+    private final Biblioteca biblioteca;
 
-    public MenuJornaisRevistas() {
+    public MenuJornaisRevistas(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
         this.Menu();
     }
 
