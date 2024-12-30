@@ -54,16 +54,16 @@ public class Menu {
                     new MenuLivros();
                     break;
                 case 2:
-                    submenu("Jornais/Revistas");
+                    new MenuJornaisRevistas();
                     break;
                 case 3:
-                    submenu("Utentes");
+                    new MenuUtentes();
                     break;
                 case 4:
-                    submenu("Empréstimo");
+                    new MenuEmprestimos();
                     break;
                 case 5:
-                    submenu("Reservar");
+                    new MenuReservar();
                     break;
                 case 6:
                     System.out.println("Saindo do programa. Até logo!");
