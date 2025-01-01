@@ -1,67 +1,33 @@
 package Gerenciamento;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import Storage.Storage;
 
-public class Livros {
-    Scanner sc = new Scanner(System.in);
+import java.nio.file.Path;
+import java.util.List;
 
-    private ArrayList<Livro> livros = new ArrayList<>();
+public class Livros{
+    private String biblioteca;
+    private Storage storage;
 
-//    public void removerLivro() {
-//        System.out.println("------------------------------------");
-//        listarLivro();
-//        System.out.printf("Digite o ISBN do Livro para deletar : ");
-//        String isbnTemp = sc.next();
-//        for (Livro livroObj : livros) {
-//            if (livroObj.getIsbn().equals(isbnTemp)) {
-//                livros.remove(livroObj);
-//            }
-//            System.out.println(livroObj.toString() + "\n" + "Removido com sucesso");
-//            break;
-//        }
-//    }
+    public Livros(String biblioteca, Storage storage) {
+        this.biblioteca = biblioteca;
+        this.storage = storage;
+    }
 
-    public void removerLivro() {
-        System.out.println("------------------------------------");
-        listarLivro(); // Listar todos os livros disponíveis
-        System.out.printf("Digite o ISBN do Livro para deletar: ");
-        String isbnTemp = sc.next(); // Ler o ISBN fornecido pelo usuário
+    public void ListarLivros() {
+        List<String> livros = this.getLivros();
 
-        // Flag para rastrear se o livro foi removido
-        boolean livroRemovido = false;
-
-        // Usar Iterator para evitar problemas de modificação da coleção
-        Iterator<Livro> iterator = livros.iterator();
-        while (iterator.hasNext()) {
-            Livro livroObj = iterator.next();
-            if (livroObj.getIsbn().equals(isbnTemp)) {
-                iterator.remove(); // Remover o livro de forma segura
-                System.out.println(livroObj.toString() + "\n" + "Removido com sucesso");
-                livroRemovido = true;
-                break; // Parar o loop após encontrar e remover o livro
-            }
+        if (livros.isEmpty()) {
+            System.out.println("Não existem livros na biblioteca " + this.biblioteca);
+            return;
         }
 
-        // Caso nenhum livro tenha sido removido
-        if (!livroRemovido) {
-            System.out.println("Nenhum livro encontrado com o ISBN fornecido.");
+        for (String livro : livros) {
+            System.out.println(livro);
         }
     }
 
-    public void adicionarLivro(Livro livro) {
-        livros.add(livro);
-    }
-
-
-    public void listarLivro() {
-        int x = 1;
-        for (Livro livro : livros) {
-            System.out.println("Livro Nº " + x + "\n" + livro.toString());
-            x++;
-        }
-
-
+    private List<String> getLivros() {
+        return storage.get(Path.of(this.biblioteca + "/livros.txt"));
     }
 }
