@@ -1,7 +1,9 @@
 package Menus;
 
 
-import Gerenciamento.Livro;
+import Gerenciamento.Biblioteca;
+import Storage.Storage;
+
 import Gerenciamento.Utente;
 
 import java.util.Scanner;
@@ -9,12 +11,26 @@ import java.util.Scanner;
 // Classe Menu corrigida e funcional
 public class Menu {
     Gerenciamento.Utentes gerenciamentoUtentes = new Gerenciamento.Utentes();
-    Gerenciamento.Livros gerenciamentoLivros = new Gerenciamento.Livros();
-    public void inicio() {
+    private Storage storage;
+
+    public Menu(Storage storage) {
+        this.storage = storage;
+    }
+
+    public void inicio(String nomeBiblioteca) {
+        Biblioteca biblioteca = new Biblioteca(nomeBiblioteca, storage);
         int op = 0;
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         do {
+            System.out.println("-------------------------------------");
+            System.out.println("      GERINDO BIBLIOTECA: " + nomeBiblioteca);
+            System.out.println("-------------------------------------");
+
+
             System.out.println("\nEscolha uma opção:");
             System.out.println("1 - Livros");
             System.out.println("2 - Jornais/Revistas");
@@ -35,19 +51,19 @@ public class Menu {
 
             switch (op) {
                 case 1:
-                    submenu("Livros");
+                    new MenuLivros(biblioteca);
                     break;
                 case 2:
-                    submenu("Jornais/Revistas");
+                    new MenuJornaisRevistas(biblioteca);
                     break;
                 case 3:
-                    submenu("Utentes");
+                    new MenuUtentes(biblioteca);
                     break;
                 case 4:
-                    submenu("Empréstimo");
+                    new MenuEmprestimos(biblioteca);
                     break;
                 case 5:
-                    submenu("Reservar");
+                    new MenuReservar(biblioteca);
                     break;
                 case 6:
                     System.out.println("Saindo do programa. Até logo!");
@@ -62,8 +78,7 @@ public class Menu {
 
     public void submenu(String titulo) {
         int op = 0;
-        Utente utenteObj = null; // Inicialmente nenhum utente é definido
-        Livro livroObj = null;
+        Gerenciamento.Utente utenteObj = null; // Inicialmente nenhum utente é definido
 
         Scanner sc = new Scanner(System.in);
 
@@ -116,31 +131,19 @@ public class Menu {
                         System.out.println("Introduza o Autor:");
                         String autorTemp = sc.nextLine();
 
-                        livroObj = new Livro(tituloTemp, editoraTemp, categoriaTemp,anoDeEdicaoTemp,isbnTemp, autorTemp);
-                        gerenciamentoLivros.adicionarLivro(livroObj);
-
                     } else {
                         System.out.println("Função não implementada para " + titulo + ".");
                     }
                     break;
 
                 case 2:
-                    if ("Utentes".equalsIgnoreCase(titulo)) {
-                        gerenciamentoUtentes.removerUtente();
-                    } else if ("Livros".equalsIgnoreCase(titulo)) {
-                        gerenciamentoLivros.removerLivro();
-                    }
-
+                    gerenciamentoUtentes.removerUtente();
 
                     break;
 
                 case 3:
                     System.out.println("Mostrar " + titulo + " selecionado.");
-                    if ("Utentes".equalsIgnoreCase(titulo)) {
-                        gerenciamentoUtentes.listarUtentes();
-                    } else if ("Livros".equalsIgnoreCase(titulo)) {
-                        gerenciamentoLivros.listarLivro();
-                    }
+                    gerenciamentoUtentes.listarUtentes();
 
                     /*if (utenteObj != null && "Utentes".equalsIgnoreCase(titulo)) {
                         System.out.println("Detalhes do Gerenciamento.Utente:");
