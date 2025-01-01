@@ -1,6 +1,7 @@
 package Menus;
 
 import Gerenciamento.Biblioteca;
+import Utils.Utils;
 
 import java.util.Scanner;
 
@@ -22,10 +23,10 @@ public class MenuLivros {
 
         do {
             System.out.println("\nGERINDO LIVROS");
-            System.out.println("1 - Adicionar Livro");
-            System.out.println("2 - Remover Livro");
-            System.out.println("3 - Mostrar Livro");
-            System.out.println("4 - Alterar Livro");
+            System.out.println("1 - Adicionar Livros");
+            System.out.println("2 - Remover Livros");
+            System.out.println("3 - Mostrar Livros");
+            System.out.println("4 - Alterar Livros");
             System.out.println("5 - Voltar ao Menu Principal");
             System.out.print("Escolha uma opção: ");
 
@@ -40,17 +41,21 @@ public class MenuLivros {
 
             switch (op) {
                 case 1:
-                    biblioteca.livros.ListarLivros();
+                    Utils.printTituloPagina("Adicionar Livro");
+                    biblioteca.livros.AdicionarLivro();
                     break;
                 case 2:
-
+                    Utils.printTituloPagina("Remover Livro");
+                    biblioteca.livros.RemoverLivro();
                     break;
 
                 case 3:
-
+                    Utils.printTituloPagina("Mostrar Livros");
+                    biblioteca.livros.ListarLivros();
                     break;
                 case 4:
-
+                    Utils.printTituloPagina("Alterar Livro");
+                    biblioteca.livros.AlterarLivro();
                     break;
 
                 case 5:

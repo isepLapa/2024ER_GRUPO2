@@ -75,11 +75,11 @@ public class Livro {
     @Override
     public String toString() {
         return
-                "titulo='" + titulo + '\n' +
-                        "editora='" + editora + '\n' +
-                        "categoria='" + categoria + '\n' +
-                        "isbn='" + isbn + '\n' +
-                        "autor='" + autor + '\n' +
-                        "anoDeEdicao='" + anoDeEdicao;
+                "titulo=" + titulo + " " +
+                        "editora=" + editora + " " +
+                        "categoria=" + categoria + " " +
+                        "isbn=" + isbn + " " +
+                        "autor=" + autor + " " +
+                        "anoDeEdicao=" + anoDeEdicao;
     }
 }
