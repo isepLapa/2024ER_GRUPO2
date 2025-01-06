@@ -76,7 +76,7 @@ public class Menu {
         sc.close();
     }
 
-    public void submenu(String titulo) {
+    /*public void submenu(String titulo) {
         int op = 0;
         Gerenciamento.Utente utenteObj = null; // Inicialmente nenhum utente é definido
 
@@ -105,17 +105,7 @@ public class Menu {
                     System.out.println("Adicionar " + titulo + " selecionado.");
 
                     if ("Utentes".equalsIgnoreCase(titulo)) {
-                        System.out.print("Introduza o nome: ");
-                        String nomeTemp = sc.nextLine();
-                        System.out.print("Introduza o NIF: ");
-                        String nifTemp = sc.nextLine();
-                        System.out.print("Introduza o género: ");
-                        String generoTemp = sc.nextLine();
-                        System.out.print("Introduza o contacto: ");
-                        String contactoTemp = sc.nextLine();
-
-                        utenteObj = new Utente(nomeTemp, nifTemp, generoTemp, contactoTemp);
-                        gerenciamentoUtentes.adicionarUtente(utenteObj);
+                        gerenciamentoUtentes.adicionarUtente();
 
                     } else if ("Livros".equalsIgnoreCase(titulo)) {
                         System.out.println("Introduza o Titulo: ");
@@ -154,7 +144,7 @@ public class Menu {
                     } else {
                         System.out.println("Nenhum " + titulo + " foi adicionado ainda.");
                     }*/
-                    break;
+    /*                break;
                 case 4:
                     System.out.println("Alterar " + titulo + " selecionado.");
 
@@ -182,5 +172,6 @@ public class Menu {
                     System.out.println("Opção inválida! Por favor, escolha entre 1 e 5.");
             }
         } while (op != 5);
-    }
+
+    }*/
 }

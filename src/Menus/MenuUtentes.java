@@ -5,6 +5,7 @@ import Gerenciamento.Biblioteca;
 import java.util.Scanner;
 
 public class MenuUtentes {
+
     private final Biblioteca biblioteca;
 
     public MenuUtentes(Biblioteca biblioteca) {
@@ -41,17 +42,15 @@ public class MenuUtentes {
 
             switch (op) {
                 case 1:
-
+                    biblioteca.utentes.adicionarUtente();
                     break;
                 case 2:
-
+                    biblioteca.utentes.removerUtente();
                     break;
-
                 case 3:
-
+                    biblioteca.utentes.listarUtentes();
                     break;
                 case 4:
-
                     break;
 
                 case 5:

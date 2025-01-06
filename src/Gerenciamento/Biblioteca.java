@@ -9,6 +9,7 @@ public class Biblioteca {
     private Storage storage;
 
     public Livros livros;
+    public Utentes utentes;
 
     public Biblioteca(String nome, Storage storage) {
         this.nome = nome;
@@ -21,6 +22,8 @@ public class Biblioteca {
         System.out.println("Biblioteca " + this.nome + " iniciada com sucesso!");
 
         this.livros = new Livros(this.nome, this.storage);
+
+        this.utentes = new Utentes();
     }
 
 }

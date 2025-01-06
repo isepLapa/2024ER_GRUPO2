@@ -7,6 +7,7 @@ public class Utente {
     private String nome;
     private String genero;
     private String contacto;
+
     Scanner sc = new Scanner(System.in);
 
     public Utente(String nome, String nif,
@@ -20,9 +21,6 @@ public class Utente {
         this.nif = nif;
         this.genero = genero;
         this.contacto = contacto;
-    }
-
-    public Utente() {
     }
 
     public String getNif() {

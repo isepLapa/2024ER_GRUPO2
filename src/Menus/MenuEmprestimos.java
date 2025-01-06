@@ -5,6 +5,7 @@ import Gerenciamento.Biblioteca;
 import java.util.Scanner;
 
 public class MenuEmprestimos {
+
     private final Biblioteca biblioteca;
 
     public MenuEmprestimos(Biblioteca biblioteca) {

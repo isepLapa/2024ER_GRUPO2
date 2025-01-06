@@ -5,6 +5,7 @@ import Gerenciamento.Biblioteca;
 import java.util.Scanner;
 
 public class MenuJornaisRevistas {
+
     private final Biblioteca biblioteca;
 
     public MenuJornaisRevistas(Biblioteca biblioteca) {
