@@ -1,5 +1,4 @@
 package Menus;
-
 import Gerenciamento.Biblioteca;
 
 import java.util.Scanner;
@@ -40,17 +39,17 @@ public class MenuJornaisRevistas {
 
             switch (op) {
                 case 1:
-
+                    biblioteca.revistajornais.adicionarRevista();
                     break;
                 case 2:
-
+                    biblioteca.revistajornais.removerRevista();
                     break;
 
                 case 3:
-
+                    biblioteca.revistajornais.listarRevistas();
                     break;
                 case 4:
-
+                    biblioteca.revistajornais.alterarRevista();
                     break;
 
                 case 5:

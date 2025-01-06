@@ -1,0 +1,1 @@
+titulo=GustavoInteligente editora=a categoria=a isbn=a anoDeEdicao=a

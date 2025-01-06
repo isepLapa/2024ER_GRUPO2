@@ -1,7 +1,5 @@
 package Utils;
 
-import Gerenciamento.Livro;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,5 +56,11 @@ public class Utils {
         Scanner sc = new Scanner(System.in);
         System.out.println(mensagem);
         return sc.nextLine();
+    }
+
+    public static int ScanInt(String mensagem) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(mensagem);
+        return sc.nextInt();
     }
 }
