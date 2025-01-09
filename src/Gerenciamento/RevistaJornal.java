@@ -29,7 +29,6 @@ public class RevistaJornal {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-
     public String getEditora() {
         return editora;
     }

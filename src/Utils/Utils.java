@@ -92,7 +92,6 @@ public class Utils {
     public static String validarData(String mensagem) {
         String data;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         do {
             data = Utils.ScanString(mensagem);
             if (data.isBlank()) {
