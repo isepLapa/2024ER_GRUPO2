@@ -1,5 +1,4 @@
 package Menus;
-
 import Gerenciamento.Biblioteca;
 
 import java.util.Scanner;
@@ -28,7 +27,6 @@ public class MenuJornaisRevistas {
             System.out.println("4 - Alterar Jornal ou Revista");
             System.out.println("5 - Voltar ao Menu Principal");
             System.out.print("Escolha uma opção: ");
-
             if (sc.hasNextInt()) {
                 op = sc.nextInt();
                 sc.nextLine(); // Consumir a quebra de linha
@@ -40,17 +38,17 @@ public class MenuJornaisRevistas {
 
             switch (op) {
                 case 1:
-
+                    biblioteca.revistajornais.adicionarRevista();
                     break;
                 case 2:
-
+                    biblioteca.revistajornais.removerRevista();
                     break;
 
                 case 3:
-
+                    biblioteca.revistajornais.listarRevistas();
                     break;
                 case 4:
-
+                    biblioteca.revistajornais.alterarRevista();
                     break;
 
                 case 5:

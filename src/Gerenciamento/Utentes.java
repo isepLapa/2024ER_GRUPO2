@@ -24,7 +24,6 @@ public class Utentes {
     public void adicionarUtente(Utente utente) {
         utentes.add(utente);
     }
-
 //        public void removerUtente(utente utente) {
 //            System.out.printf("");
 //            utentes.remove(utente);
@@ -41,8 +40,6 @@ public class Utentes {
             System.out.println("Gerenciamento.Utente " + x + "\n" + utente.toString());
             x++;
         }
-
-
     }
 }
 
