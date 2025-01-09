@@ -1,66 +1,38 @@
 package Menus;
 
 import Gerenciamento.Biblioteca;
+import Gerenciamento.Utentes;
 
-import java.util.Scanner;
+public class MenuUtentes extends Menu {
 
-public class MenuUtentes {
     private final Biblioteca biblioteca;
 
     public MenuUtentes(Biblioteca biblioteca) {
+        super( "Utentes", new String[] {"Adicionar Utente", "Remover Utente", "Alterar Utente", "Listar Utentes"}, biblioteca);
         this.biblioteca = biblioteca;
-        this.Menu();
+        Menu();
     }
-
 
     private void Menu() {
-        System.out.println("Menu Utentes");
+        renderMenu();
+        switch (validateUserInput()) {
+            case 1:
+                biblioteca.utentes.adicionarUtente();
+                break;
+            case 2:
+                biblioteca.utentes.removerUtente();
+                break;
+            case 3:
 
-        int op = 0;
-
-        Scanner sc = new Scanner(System.in);
-
-        do {
-            System.out.println("\nGERINDO UTENTES");
-            System.out.println("1 - Adicionar Utente");
-            System.out.println("2 - Remover Utente");
-            System.out.println("3 - Mostrar Utente");
-            System.out.println("4 - Alterar Utente");
-
-            System.out.println("5 - Voltar ao Menu Principal");
-            System.out.print("Escolha uma opção: ");
-
-            if (sc.hasNextInt()) {
-                op = sc.nextInt();
-                sc.nextLine(); // Consumir a quebra de linha
-            } else {
-                System.out.println("Entrada inválida! Por favor, insira um número.");
-                sc.next(); // Limpar entrada inválida
-                continue;
-            }
-
-            switch (op) {
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
-
-                case 3:
-
-                    break;
-                case 4:
-
-                    break;
-
-                case 5:
-                    System.out.println("Voltando ao Menu Principal...");
-                    break;
-
-                default:
-                    System.out.println("Opção inválida! Por favor, escolha entre 1 e 5.");
-            }
-        } while (op != 5);
+                break;
+            case 4:
+                biblioteca.utentes.listarUtentes();
+                break;
+            default:
+                System.out.println("opção invalida");
+                break;
+        }
+        Menu();
     }
+
 }

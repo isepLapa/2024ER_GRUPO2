@@ -2,13 +2,12 @@ package Gerenciamento;
 
 import Storage.Storage;
 
-import java.util.List;
-
 public class Biblioteca {
     private String nome;
     private Storage storage;
 
     public Livros livros;
+    public Utentes utentes;
     public RevistaJornais revistajornais;
 
     public Biblioteca(String nome, Storage storage) {
@@ -22,6 +21,8 @@ public class Biblioteca {
         System.out.println("Biblioteca " + this.nome + " iniciada com sucesso!");
 
         this.livros = new Livros(this.nome, this.storage);
+
+        this.utentes = new Utentes();
         this.revistajornais = new RevistaJornais(this.nome, this.storage);
     }
 
