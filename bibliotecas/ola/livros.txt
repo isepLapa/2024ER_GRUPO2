@@ -1,1 +1,0 @@
-titulo=1 editora=1 categoria=1 isbn=1 autor=1 anoDeEdicao=1

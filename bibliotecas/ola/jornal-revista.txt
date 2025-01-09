@@ -1,4 +1,0 @@
-titulo=GustavoInteligente editora=a categoria=a isbn=a anoDeEdicao=a
-titulo=a editora=a categoria=a isbn=ISSN:  anoDeEdicao=10/03/2004
-titulo=b editora=b categoria=b isbn=1234-456X anoDeEdicao=2004/10/1
-titulo=b editora=b categoria=b isbn=1234-456X anoDeEdicao=10/03/2004
