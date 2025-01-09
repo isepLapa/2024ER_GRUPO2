@@ -16,6 +16,7 @@ public class RevistaJornais {
     public RevistaJornais(String biblioteca, Storage storage) {
         this.biblioteca = biblioteca;
         this.storage = storage;
+
         this.revistasPath = Path.of(this.biblioteca + "/jornal-revista.txt");
         this.revistas = this.getRevistas();
     }

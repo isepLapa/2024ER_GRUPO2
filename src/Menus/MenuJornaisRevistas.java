@@ -43,6 +43,7 @@ public class MenuJornaisRevistas {
                 case 2:
                     biblioteca.revistajornais.removerRevista();
                     break;
+
                 case 3:
                     biblioteca.revistajornais.listarRevistas();
                     break;
