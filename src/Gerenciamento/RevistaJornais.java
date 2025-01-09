@@ -32,11 +32,14 @@ public class RevistaJornais {
     }
 
     public void adicionarRevista() {
-        String titulo = Utils.ScanString("Título do Jornal/Revista: ");
-        String editora = Utils.ScanString("Editora: ");
-        String categoria = Utils.ScanString("Categoria: ");
-        String issn = Utils.ScanString("ISSN: ");
-        String dataPublicacao = Utils.ScanString("Data de Publicação (dd/MM/yyyy): ");
+        
+        String titulo = Utils.validarVazio("Título do Jornal/Revista: ");
+        String editora = Utils.validarVazio("Editora do Jornal/Revista: ");
+        String categoria = Utils.validarVazio("Categoria do Jornal/Revista: ");
+        String issn = Utils.validarIssn("Introduza o ISSN: ");
+        String dataPublicacao = Utils.validarData("Data de Publicação (dd/MM/yyyy): ");
+
+
 
         RevistaJornal revista = new RevistaJornal(titulo, editora, categoria, dataPublicacao, issn);
         revistas.add(revista.toString());
@@ -90,7 +93,6 @@ public class RevistaJornais {
 
     /**
      * Analisa uma representação em string de uma revista/jornal e retorna um objeto RevistaJornal.
-     *
      * @param revista a representação em string no formato "titulo=... editora=... categoria=... issn=... datapub=..."
      * @return um objeto RevistaJornal com os detalhes analisados
      */

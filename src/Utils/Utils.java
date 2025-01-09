@@ -1,5 +1,8 @@
 package Utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -62,5 +65,47 @@ public class Utils {
         Scanner sc = new Scanner(System.in);
         System.out.println(mensagem);
         return sc.nextInt();
+    }
+    public static String validarVazio(String mensagem) {
+        String var;
+        do {
+            var = Utils.ScanString(mensagem);
+            if (var.isBlank()) {
+                System.out.println("Este campo é obrigatório, por favor introduza um valor válido.");
+            }
+        } while (var.isBlank());
+        return var;
+    }
+    public static String validarIssn(String mensagem) {
+        String var;
+        do {
+            var = Utils.ScanString(mensagem);
+            if (var.isBlank()) {
+                System.out.println("Este campo é obrigatório, por favor introduza um valor válido.");
+            } else if (!var.matches("\\d{4}-\\d{3}[\\dXx]")) {
+                System.out.println("Por favor, insira o ISSN no formato 0000-000X.");
+            } else {
+                return var;
+            }
+        } while (true);
+    }
+
+    public static String validarData(String mensagem) {
+        String data;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        do {
+            data = Utils.ScanString(mensagem);
+            if (data.isBlank()) {
+                System.out.println("Este campo é obrigatório, por favor introduza uma data válida.");
+            } else {
+                try {
+                    LocalDate.parse(data, formatter);
+                    return data; // Retorna a data válida
+                } catch (DateTimeParseException e) {
+                    System.out.println("Por favor, insira a data no formato dd/MM/yyyy.");
+                }
+            }
+        } while (true);
     }
 }

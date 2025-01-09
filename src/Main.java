@@ -15,12 +15,10 @@ public class Main {
 
         if (bibliotecas.isEmpty()) {
             System.out.println("Nenhuma Biblioteca encontrada, deseja criar uma nova? (S/N)");
-
             String resposta = sc.nextLine();
             if (resposta.equalsIgnoreCase("S")) {
                 System.out.print("Escreve o nome da biblioteca: ");
                 storage.createBiblioteca(sc.nextLine());
-
                 bibliotecas = storage.getBibliotecas(); // Atualizar lista de bibliotecas
             }
         }
