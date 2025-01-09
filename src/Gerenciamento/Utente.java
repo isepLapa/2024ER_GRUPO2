@@ -12,7 +12,7 @@ public class Utente {
     public Utente(String nome, String nif,
                   String genero, String contacto) {
         while (!nifValido(nif)) {
-            System.out.println("ensira o NIF novamente : ");
+            System.out.println("insira o NIF novamente : ");
             nif = sc.next();
             setNif(nif);
         }

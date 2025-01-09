@@ -1,6 +1,9 @@
 package Menus;
 
 import Gerenciamento.Biblioteca;
+import Gerenciamento.Reserva;
+import Gerenciamento.Reservas;
+import Utils.Utils;
 
 import java.util.Scanner;
 
@@ -14,6 +17,7 @@ public class MenuReservar {
 
 
     private void Menu() {
+        Reservas Reservas = new Reservas();
         System.out.println("Menu Reservar");
 
         int op = 0;
@@ -40,17 +44,20 @@ public class MenuReservar {
 
             switch (op) {
                 case 1:
-
+                    Utils.printTituloPagina("Adicionar Reserva");
+                    Reservas.addReserva();
                     break;
                 case 2:
-
+                    Utils.printTituloPagina("Remover Reserva");
+                    Reservas.removerReserva();
                     break;
 
                 case 3:
-
+                    Utils.printTituloPagina("Mostrar Reserva");
+                    Reservas.listarReservas();
                     break;
                 case 4:
-
+                    Utils.printTituloPagina("Alterar Reserva");
                     break;
 
                 case 5:
