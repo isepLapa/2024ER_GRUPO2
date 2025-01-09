@@ -8,6 +8,7 @@ public class Biblioteca {
 
     public Livros livros;
     public Utentes utentes;
+    public RevistaJornais revistajornais;
 
     public Biblioteca(String nome, Storage storage) {
         this.nome = nome;
@@ -22,6 +23,7 @@ public class Biblioteca {
         this.livros = new Livros(this.nome, this.storage);
 
         this.utentes = new Utentes();
+        this.revistajornais = new RevistaJornais(this.nome, this.storage);
     }
 
 }

@@ -1,5 +1,4 @@
 package Menus;
-
 import Gerenciamento.Biblioteca;
 
 import java.util.Scanner;
@@ -18,16 +17,16 @@ public class MenuJornaisRevistas extends Menu {
         renderMenu();
         switch (validateUserInput()) {
             case 1:
-
+                biblioteca.revistajornais.adicionarRevista();
                 break;
             case 2:
-
+                biblioteca.revistajornais.removerRevista();
                 break;
             case 3:
-
+                biblioteca.revistajornais.listarRevistas();
                 break;
             case 4:
-
+                biblioteca.revistajornais.alterarRevista();
                 break;
             default:
                 System.out.println("opção invalida");
