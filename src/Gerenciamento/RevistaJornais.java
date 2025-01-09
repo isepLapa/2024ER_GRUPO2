@@ -32,7 +32,7 @@ public class RevistaJornais {
     }
 
     public void adicionarRevista() {
-        
+
         String titulo = Utils.validarVazio("Título do Jornal/Revista: ");
         String editora = Utils.validarVazio("Editora do Jornal/Revista: ");
         String categoria = Utils.validarVazio("Categoria do Jornal/Revista: ");

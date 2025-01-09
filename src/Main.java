@@ -10,7 +10,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Storage storage = new Storage();
         Menu menu = new Menu(storage);
-
         List<String> bibliotecas = storage.getBibliotecas();
 
         if (bibliotecas.isEmpty()) {

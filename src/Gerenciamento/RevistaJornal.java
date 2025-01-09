@@ -45,7 +45,6 @@ public class RevistaJornal {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-
     public String getDatapub() {
         return datapub;
     }

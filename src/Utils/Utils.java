@@ -89,7 +89,6 @@ public class Utils {
             }
         } while (true);
     }
-
     public static String validarData(String mensagem) {
         String data;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

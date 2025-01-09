@@ -27,7 +27,6 @@ public class MenuJornaisRevistas {
             System.out.println("4 - Alterar Jornal ou Revista");
             System.out.println("5 - Voltar ao Menu Principal");
             System.out.print("Escolha uma opção: ");
-
             if (sc.hasNextInt()) {
                 op = sc.nextInt();
                 sc.nextLine(); // Consumir a quebra de linha
