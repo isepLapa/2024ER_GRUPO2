@@ -10,9 +10,10 @@ public class Menu {
     private final String title;
     private Biblioteca biblioteca;
 
-    public Menu(String title, String[] options) {
+    public Menu(String title, String[] options, Biblioteca biblioteca) {
         this.options = options;
         this.title = title;
+        this.biblioteca = biblioteca;
     }
 
     //mostra o menu

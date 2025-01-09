@@ -2,8 +2,6 @@ package Gerenciamento;
 
 import Storage.Storage;
 
-import java.util.List;
-
 public class Biblioteca {
     private String nome;
     private Storage storage;

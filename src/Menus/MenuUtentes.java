@@ -8,7 +8,7 @@ public class MenuUtentes extends Menu {
     private final Biblioteca biblioteca;
 
     public MenuUtentes(Biblioteca biblioteca) {
-        super( "Utentes", new String[] {"Adicionar Utente", "Remover Utente", "Alterar Utente", "Listar Utentes"});
+        super( "Utentes", new String[] {"Adicionar Utente", "Remover Utente", "Alterar Utente", "Listar Utentes"}, biblioteca);
         this.biblioteca = biblioteca;
         Menu();
     }
