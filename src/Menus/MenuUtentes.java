@@ -6,12 +6,10 @@ import Gerenciamento.Utentes;
 public class MenuUtentes extends Menu {
 
     private final Biblioteca biblioteca;
-    private Utentes utentes;
 
     public MenuUtentes(Biblioteca biblioteca) {
         super( "Utentes", new String[] {"Adicionar Utente", "Remover Utente", "Alterar Utente", "Listar Utentes"});
         this.biblioteca = biblioteca;
-        utentes = new Utentes();
         Menu();
     }
 
@@ -19,23 +17,21 @@ public class MenuUtentes extends Menu {
         renderMenu();
         switch (validateUserInput()) {
             case 1:
-                utentes.adicionarUtente();
+                biblioteca.utentes.adicionarUtente();
                 break;
             case 2:
-                utentes.removerUtente();
+                biblioteca.utentes.removerUtente();
                 break;
             case 3:
 
                 break;
             case 4:
-                utentes.listarUtentes();
+                biblioteca.utentes.listarUtentes();
                 break;
             default:
                 System.out.println("opção invalida");
-                Menu();
                 break;
         }
-
         Menu();
     }
 

@@ -21,6 +21,10 @@ public class MenuReservar extends Menu {
             case 1:
                 System.out.println("reservar jdnajds");
                 break;
+
+            default:
+                System.out.println("Opção invalida");
+                break;
         }
     }
 }

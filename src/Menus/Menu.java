@@ -1,11 +1,14 @@
 package Menus;
 
+import Gerenciamento.Biblioteca;
+
 import java.util.Scanner;
 
 public class Menu {
 
     private final String[] options;
-    private String title;
+    private final String title;
+    private Biblioteca biblioteca;
 
     public Menu(String title,String[] options) {
         this.options = options;
@@ -20,6 +23,7 @@ public class Menu {
             System.out.println(x + " - " + option);
             x++;
         }
+        System.out.println(x + " - Voltar");
     }
 
     //retorna uma opçao valida introduzida pelo usuario
@@ -27,8 +31,16 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduza uma opção: ");
 
-        if (scanner.hasNextLine() || scanner.nextInt() <= options.length)
-            return scanner.nextInt();
+        int op = 0;
+
+        if (scanner.hasNextInt()) {
+            op = scanner.nextInt();
+
+            if (op == options.length+1)
+                new MenuBiblioteca(biblioteca);
+            else if (op <= options.length)
+                return scanner.nextInt();
+        }
         return 0;
     }
 

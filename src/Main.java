@@ -1,3 +1,4 @@
+import Gerenciamento.Biblioteca;
 import Menus.*;
 import Storage.Storage;
 import Utils.Utils;
@@ -7,9 +8,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         Storage storage = new Storage();
-        MenuBiblioteca menuBiblioteca = new MenuBiblioteca(storage);
 
         List<String> bibliotecas = storage.getBibliotecas();
 
@@ -29,6 +30,10 @@ public class Main {
 
         int escolha = Utils.TransformarListaEmEscolha("Escolha uma biblioteca: ", bibliotecas);
 
-        menuBiblioteca.inicio(bibliotecas.get(escolha));
+        Biblioteca biblioteca = new Biblioteca(bibliotecas.get(escolha),storage);
+
+        new MenuBiblioteca(biblioteca);
+
+
     }
 }
