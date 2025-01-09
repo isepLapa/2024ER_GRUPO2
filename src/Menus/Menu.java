@@ -1,14 +1,14 @@
 package Menus;
 
 import Gerenciamento.Biblioteca;
-
+import Utils.Utils;
 import java.util.Scanner;
 
 public class Menu {
 
     private final String[] options;
     private final String title;
-    private Biblioteca biblioteca;
+    private final Biblioteca biblioteca;
 
     public Menu(String title, String[] options, Biblioteca biblioteca) {
         this.options = options;
@@ -19,7 +19,7 @@ public class Menu {
     //mostra o menu
     public void renderMenu() {
         int x = 1;
-        Utils.Utils.printTituloPagina(title);
+        Utils.printTituloPagina(title);
         for (String option : options) {
             System.out.println(x + " - " + option);
             x++;

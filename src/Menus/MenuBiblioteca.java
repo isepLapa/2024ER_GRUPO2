@@ -37,7 +37,7 @@ public class MenuBiblioteca extends Menu{
                 new MenuReservar(biblioteca);
                 break;
             default:
-                System.out.printf("opção invalida");
+                System.out.println("opção invalida");
                 break;
         }
         Menu();

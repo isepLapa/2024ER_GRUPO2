@@ -14,7 +14,7 @@ public class Utentes {
     public void removerUtente(){
         System.out.println("------------------------------------");
         listarUtentes();
-        System.out.printf("Digite o NIF do Gerenciamento.Utente para deletar : ");
+        System.out.println("Digite o NIF do Gerenciamento.Utente para deletar : ");
         String nifTemp = sc.next();
         for (Utente utenteObj : utentes) {
             if (utenteObj.getNif().equals(nifTemp)) {

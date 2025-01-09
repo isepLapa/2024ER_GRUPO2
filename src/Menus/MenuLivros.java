@@ -20,16 +20,16 @@ public class MenuLivros extends Menu {
         renderMenu();
         switch (validateUserInput()) {
             case 1:
-
+                biblioteca.livros.AdicionarLivro();
                 break;
             case 2:
-
+                biblioteca.livros.RemoverLivro();
                 break;
             case 3:
-
+                biblioteca.livros.ListarLivros();
                 break;
             case 4:
-
+                biblioteca.livros.AlterarLivro();
                 break;
             default:
                 System.out.println("opção invalida");

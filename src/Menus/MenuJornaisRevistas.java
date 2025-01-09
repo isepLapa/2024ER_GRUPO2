@@ -20,13 +20,13 @@ public class MenuJornaisRevistas extends Menu {
                 biblioteca.revistajornais.adicionarRevista();
                 break;
             case 2:
-                biblioteca.revistajornais.removerRevista();
+                biblioteca.revistajornais.alterarRevista();
                 break;
             case 3:
-                biblioteca.revistajornais.listarRevistas();
+                biblioteca.revistajornais.removerRevista();
                 break;
             case 4:
-                biblioteca.revistajornais.alterarRevista();
+                biblioteca.revistajornais.listarRevistas();
                 break;
             default:
                 System.out.println("opção invalida");
