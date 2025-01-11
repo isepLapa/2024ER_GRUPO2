@@ -107,7 +107,7 @@ public class RevistaJornais {
         return new RevistaJornal(titulo, editora, categoria, datapub, issn);
     }
 
-    private List<String> getRevistas() {
+    public List<String> getRevistas() {
         List<String> revistasSalvas = storage.get(this.revistasPath);
         return revistasSalvas != null ? revistasSalvas : new ArrayList<>();
     }

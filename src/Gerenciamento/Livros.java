@@ -127,7 +127,7 @@ public class Livros{
         return new Livro(titulo, editora, categoria, anoDeEdicao, isbn, autor);
     }
 
-    private List<String> getLivros() {
+    public List<String> getLivros() {
         return storage.get(this.livrosPath);
     }
 

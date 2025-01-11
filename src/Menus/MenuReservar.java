@@ -9,7 +9,7 @@ public class MenuReservar extends Menu {
     private final Biblioteca biblioteca;
 
     public MenuReservar(Biblioteca biblioteca) {
-        super("Reservas" ,new String[]{"Reservar"}, biblioteca);
+        super("Reservas" ,new String[]{"Reservar"}, biblioteca, true);
         this.biblioteca = biblioteca;
         this.Menu();
     }

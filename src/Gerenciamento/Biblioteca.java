@@ -18,7 +18,6 @@ public class Biblioteca {
     }
 
     private void IniciarBiblioteca() {
-        System.out.println("Biblioteca " + this.nome + " iniciada com sucesso!");
 
         this.livros = new Livros(this.nome, this.storage);
 

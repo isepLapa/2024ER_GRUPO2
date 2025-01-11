@@ -13,7 +13,7 @@ public class MenuBiblioteca extends Menu{
     private Biblioteca biblioteca;
 
     public MenuBiblioteca(Biblioteca biblioteca) {
-        super("Biblioteca", new String[]{"Livros", "Jornais/Revistas", "Utentes", "Emprestimos", "Reservar"}, biblioteca);
+        super("Biblioteca", new String[]{"Livros", "Jornais/Revistas", "Utentes", "Emprestimos", "Reservar", "Sair"}, biblioteca, false);
         this.biblioteca = biblioteca;
         Menu();
     }
@@ -36,6 +36,11 @@ public class MenuBiblioteca extends Menu{
             case 5:
                 new MenuReservar(biblioteca);
                 break;
+
+            case 6:
+                new MenuBibliotecas();
+                break;
+
             default:
                 System.out.println("opção invalida");
                 break;
