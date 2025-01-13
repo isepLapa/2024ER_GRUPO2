@@ -8,7 +8,7 @@ public class MenuJornaisRevistas extends Menu {
     private final Biblioteca biblioteca;
 
     public MenuJornaisRevistas(Biblioteca biblioteca) {
-        super("Jornais/Revistas", new String[]{"Adicionar", "Editar", "Eliminar", "Listar"}, biblioteca);
+        super("Jornais/Revistas", new String[]{"Adicionar", "Editar", "Eliminar", "Listar"}, biblioteca, true);
         this.biblioteca = biblioteca;
         this.Menu();
     }

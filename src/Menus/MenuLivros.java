@@ -10,7 +10,7 @@ public class MenuLivros extends Menu {
     private final Biblioteca biblioteca;
 
     public MenuLivros(Biblioteca biblioteca) {
-        super("Livros", new String[]{"Adicionar Livros", "Remover Livros", "Mostrar Livros", "Alterar Livros"}, biblioteca);
+        super("Livros", new String[]{"Adicionar Livros", "Remover Livros", "Mostrar Livros", "Alterar Livros"}, biblioteca, true);
         this.biblioteca = biblioteca;
         this.Menu();
     }
