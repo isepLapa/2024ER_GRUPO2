@@ -33,13 +33,11 @@ public class RevistaJornais {
 
     public void adicionarRevista() {
 
-        String titulo = Utils.validarVazio("Título do Jornal/Revista: ");
-        String editora = Utils.validarVazio("Editora do Jornal/Revista: ");
-        String categoria = Utils.validarVazio("Categoria do Jornal/Revista: ");
-        String issn = Utils.validarIssn("Introduza o ISSN: ");
-        String dataPublicacao = Utils.validarData("Data de Publicação (dd/MM/yyyy): ");
-
-
+        String titulo = Utils.ScanString("Título do Jornal/Revista: ");
+        String editora = Utils.ScanString("Editora do Jornal/Revista: ");
+        String categoria = Utils.ScanString("Categoria do Jornal/Revista: ");
+        String issn = Utils.validarIssn(Utils.ScanString("Introduza o ISSN: "));
+        String dataPublicacao = Utils.validarData(Utils.ScanString("Data de Publicação (dd/MM/yyyy): "));
 
         RevistaJornal revista = new RevistaJornal(titulo, editora, categoria, dataPublicacao, issn);
         revistas.add(revista.toString());

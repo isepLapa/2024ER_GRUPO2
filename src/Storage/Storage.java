@@ -28,8 +28,12 @@ public class Storage {
      * @param biblioteca Caminho onde os dados vão ser salvos.
      * @param data A lista de dados a serem salvos.
      */
-    public void save(Path biblioteca, List<String> data) {
-        this.EscreverEmFicheiro("bibliotecas/" + biblioteca, data);
+    public <T> void save(Path biblioteca, List<T> data) {
+        List<String> stringData = new ArrayList<>();
+        for (T item : data) {
+            stringData.add(item.toString());
+        }
+        this.EscreverEmFicheiro("bibliotecas/" + biblioteca, stringData);
     }
 
     /**
@@ -57,6 +61,18 @@ public class Storage {
 
         this.EscreverEmFicheiro("bibliotecas/" + biblioteca.toString(), lista);
         System.out.println("Item removido com sucesso!");
+    }
+
+    public boolean verificarSeItemExiste(Path biblioteca, List<String> lista, String query) {
+        for (String item : lista) {
+            String[] parts = item.split("\\s+");
+            for (String part : parts) {
+                if (part.equals(query)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void createBiblioteca(String biblioteca) {
