@@ -1,24 +1,24 @@
 package Gerenciamento;
 
-public class Livro {
+import java.util.Scanner;
+
+public class RevistaJornal {
     private String titulo;
     private String editora;
     private String categoria;
-    private String anoDeEdicao;
-    private String isbn;
-    private String autor;
+    private String isnn;
+    private String datapub;
 
-    public Livro(String titulo, String editora, String categoria,
-                 String anoDeEdicao, String isbn, String autor) {
+    public RevistaJornal(String titulo, String editora, String categoria,
+                 String datapub, String isnn) {
         this.titulo = titulo;
         this.editora = editora;
         this.categoria = categoria;
-        this.anoDeEdicao = anoDeEdicao;
-        this.isbn = isbn;
-        this.autor = autor;
+        this.datapub = datapub;
+        this.isnn = isnn;
     }
 
-    public Livro() {
+    public RevistaJornal() {
 
     }
 
@@ -45,30 +45,22 @@ public class Livro {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-
-    public String getAnoDeEdicao() {
-        return anoDeEdicao;
+    public String getDatapub() {
+        return datapub;
     }
 
-    public void setAnoDeEdicao(String anoDeEdicao) {
-        this.anoDeEdicao = anoDeEdicao;
+    public void setDatapub(String Datapub) {
+        this.datapub = datapub;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getIsnn() {
+        return isnn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setIsnn(String isnn) {
+        this.isnn = isnn;
     }
 
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
 
     @Override
     public String toString() {
@@ -76,8 +68,7 @@ public class Livro {
                 "titulo=" + titulo + " " +
                         "editora=" + editora + " " +
                         "categoria=" + categoria + " " +
-                        "isbn=" + isbn + " " +
-                        "autor=" + autor + " " +
-                        "anoDeEdicao=" + anoDeEdicao;
+                        "isbn=" + isnn + " " +
+                        "anoDeEdicao=" + datapub;
     }
 }

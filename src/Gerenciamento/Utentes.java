@@ -1,5 +1,7 @@
 package Gerenciamento;
 
+import Utils.Utils;
+
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -12,37 +14,35 @@ public class Utentes {
     public void removerUtente(){
         System.out.println("------------------------------------");
         listarUtentes();
-        System.out.printf("Digite o NIF do Gerenciamento.Utente para deletar : ");
+        System.out.println("Digite o NIF do Gerenciamento.Utente para deletar : ");
         String nifTemp = sc.next();
         for (Utente utenteObj : utentes) {
-            if (utenteObj.getNif().equals(nifTemp))
+            if (utenteObj.getNif().equals(nifTemp)) {
                 utentes.remove(utenteObj);
-            System.out.println(utenteObj.toString() + "\n" +"Removido com sucesso");
+                System.out.println(utenteObj.toString() + "\n" +"Removido com sucesso");
+                break;
+            }
+            else {
+                System.out.println("O utilizador não existe");
+            }
         }
     }
 
-    public void adicionarUtente(Utente utente) {
+    public void adicionarUtente() {
+        String nif = Utils.ScanString("introduza o nif");
+        String name = Utils.ScanString("introduza o nome");
+        String gender = Utils.ScanString("introduza o genero");
+        String contact = Utils.ScanString("introduza o Contacto");
+        Utente utente = new Utente(nif, name, gender, contact);
         utentes.add(utente);
     }
 
-//        public void removerUtente(utente utente) {
-//            System.out.printf("");
-//            utentes.remove(utente);
-//        } NÃO APAGAR !!!!!!!
-
     public void listarUtentes() {
-
-//            for (int i = 0; i < utentes.size(); i++) {
-//                System.out.println("Gerenciamento.Utente " + i++ + utentes.get(i));
-//            }
-
         int x = 1;
         for (Utente utente: utentes) {
             System.out.println("Gerenciamento.Utente " + x + "\n" + utente.toString());
             x++;
         }
-
-
     }
 }
 

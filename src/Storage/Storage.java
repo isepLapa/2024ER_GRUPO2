@@ -28,8 +28,12 @@ public class Storage {
      * @param biblioteca Caminho onde os dados vão ser salvos.
      * @param data A lista de dados a serem salvos.
      */
-    public void save(Path biblioteca, List<String> data) {
-        this.EscreverEmFicheiro("bibliotecas/" + biblioteca, data);
+    public <T> void save(Path biblioteca, List<T> data) {
+        List<String> stringData = new ArrayList<>();
+        for (T item : data) {
+            stringData.add(item.toString());
+        }
+        this.EscreverEmFicheiro("bibliotecas/" + biblioteca, stringData);
     }
 
     /**
@@ -40,29 +44,49 @@ public class Storage {
      * @param query O critério de busca para encontrar o item a ser removido.
      */
     public void remove(Path biblioteca, List<String> lista, String query) {
-        boolean itemRemovido = lista.removeIf(item -> item.contains(query + " "));
+        boolean itemRemovido = lista.removeIf(item -> {
+            String[] parts = item.split("\\s+");
+            for (String part : parts) {
+                if (part.equals(query)) {
+                    return true;
+                }
+            }
+            return false;
+        });
 
         if(!itemRemovido) {
-            System.out.println("Livro não encontrado!");
+            System.out.println("Item não encontrado!");
             return;
         }
 
-        this.EscreverEmFicheiro("bibliotecas/" + biblioteca, lista);
-        System.out.println("Livro removido com sucesso!");
+        this.EscreverEmFicheiro("bibliotecas/" + biblioteca.toString(), lista);
+        System.out.println("Item removido com sucesso!");
+    }
+
+    public boolean verificarSeItemExiste(Path biblioteca, List<String> lista, String query) {
+        for (String item : lista) {
+            String[] parts = item.split("\\s+");
+            for (String part : parts) {
+                if (part.equals(query)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void createBiblioteca(String biblioteca) {
+        // Criar diretório da biblioteca
+        File dir = new File("bibliotecas/" + biblioteca);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
         // Implementar a criação de uma nova biblioteca
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("bibliotecas.txt", true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("bibliotecas/bibliotecas.txt", true))) {
             bw.write(biblioteca);
             bw.newLine();
             System.out.println("Biblioteca adicionada com sucesso!");
-
-            // Criar diretório da biblioteca
-            File dir = new File("bibliotecas/" + biblioteca);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
 
             // Criar ficheiros dentro do diretório da biblioteca
             new File(dir, "livros.txt").createNewFile();
@@ -76,9 +100,26 @@ public class Storage {
         }
     }
 
+    public void removeFile(String biblioteca) {
+        try {
+            File dir = new File("bibliotecas/" + biblioteca);
+            if (dir.exists()) {
+                for (File file : dir.listFiles()) {
+                    file.delete();
+                }
+                dir.delete();
+                System.out.println("Biblioteca removida com sucesso!");
+            } else {
+                System.out.println("Biblioteca não encontrada!");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao remover a biblioteca");
+        }
+    }
+
     private List<String> GetBibliotecas() {
         List<String> bibliotecas = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("bibliotecas.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("bibliotecas/bibliotecas.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 bibliotecas.add(line);
