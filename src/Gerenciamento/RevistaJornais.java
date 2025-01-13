@@ -16,7 +16,6 @@ public class RevistaJornais {
     public RevistaJornais(String biblioteca, Storage storage) {
         this.biblioteca = biblioteca;
         this.storage = storage;
-
         this.revistasPath = Path.of(this.biblioteca + "/jornal-revista.txt");
         this.revistas = this.getRevistas();
     }
@@ -26,7 +25,6 @@ public class RevistaJornais {
             System.out.println("Não existem revistas ou jornais na biblioteca " + this.biblioteca);
             return;
         }
-
         System.out.println("Lista de Revistas e Jornais:");
         revistas.forEach(System.out::println);
     }
@@ -79,8 +77,8 @@ public class RevistaJornais {
             case 1 -> revista.setTitulo(Utils.ScanString("Novo título: "));
             case 2 -> revista.setEditora(Utils.ScanString("Nova editora: "));
             case 3 -> revista.setCategoria(Utils.ScanString("Nova categoria: "));
-            case 4 -> revista.setDatapub(Utils.ScanString("Nova data de publicação (dd/MM/yyyy): "));
-            case 5 -> revista.setIsnn(Utils.ScanString("Novo ISSN: "));
+            case 4 -> revista.setDatapub(Utils.validarData("Nova data de publicação (dd/MM/yyyy): "));
+            case 5 -> revista.setIsnn(Utils.validarIssn("Novo ISSN: "));
             default -> System.out.println("Opção inválida!");
         }
 

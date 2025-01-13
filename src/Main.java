@@ -11,7 +11,6 @@ public class Main {
 
 
 
-
         new MenuBibliotecas();
 
         //new MenuBiblioteca(new Biblioteca(bibliotecas.listaBibliotecas().get(bibliotecas.getBibliotecaEscolhida()),storage));

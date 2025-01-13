@@ -13,7 +13,7 @@ public class Utente {
     public Utente(String nome, String nif,
                   String genero, String contacto) {
         while (!nifValido(nif)) {
-            System.out.println("ensira o NIF novamente : ");
+            System.out.println("Insira o NIF novamente : ");
             nif = sc.next();
             setNif(nif);
         }
@@ -65,7 +65,7 @@ public class Utente {
     @Override
     public String toString() {
         return
-                "nif='" + nif + '\n' +
+                        "nif='" + nif + '\n' +
                         "nome='" + nome + '\n' +
                         "genero='" + genero + '\n' +
                         "contacto='" + contacto;

@@ -136,4 +136,16 @@ public class Utils {
         } while (flag);
         return query;
     }
+        public static String validarNif(String mensagem) {
+            Scanner sc = new Scanner(System.in);
+            String input;
+            do {
+                System.out.println(mensagem);
+                input = sc.nextLine();
+                if (input.isBlank() || input.length()!=9 && !input.matches("[0-9]+")){
+                    System.out.println("Este campo é obrigatório, por favor introduza um valor válido.");
+                }
+            } while (input.isBlank() || input.length()!=9 && !input.matches("[0-9]+"));
+            return input;
+    }
 }

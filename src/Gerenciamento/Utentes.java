@@ -29,7 +29,7 @@ public class Utentes {
     }
 
     public void adicionarUtente() {
-        String nif = Utils.ScanString("introduza o nif");
+        String nif = Utils.validarNif("introduza o nif");
         String name = Utils.ScanString("introduza o nome");
         String gender = Utils.ScanString("introduza o genero");
         String contact = Utils.ScanString("introduza o Contacto");
