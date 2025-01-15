@@ -23,6 +23,8 @@ public class Biblioteca {
 
         this.utentes = new Utentes();
         this.revistajornais = new RevistaJornais(this.nome, this.storage);
+
+
     }
 
 }

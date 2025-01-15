@@ -9,34 +9,64 @@ import java.util.Scanner;
 public class Reservas {
     Scanner sc = new Scanner(System.in);
     private List<Reserva> listaReservas = new ArrayList<>();
+    private Biblioteca biblioteca;
 
-    // Method to add a new reservation
+    public Reservas(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+
+    }
+
     public boolean addReserva() {
-        try {
-            // Collect input from the user
-            String utente = Utils.ScanString("Utente: ");
-            String tituloLivro = Utils.ScanString("Titulo do Livro: ");
-            LocalDate dataInicio = LocalDate.parse(Utils.ScanString("Data de inicio (yyyy-MM-dd): "));
-            LocalDate dataFim = LocalDate.parse(Utils.ScanString("Data de Fim (yyyy-MM-dd): "));
-
-            // Validate dates
-            if (dataInicio.isAfter(dataFim)) {
-                System.out.println("Erro: A data de início deve ser anterior ou igual à data de fim.");
-                return false;
-            }
-
-            // Create and add a reservation
-            int numero = listaReservas.size() + 1; // Auto-increment reservation number
-            LocalDate dataRegisto = LocalDate.now(); // Current date
-            Reserva novaReserva = new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
-            listaReservas.add(novaReserva);
-
-            System.out.println("Reserva adicionada com sucesso!");
-            return true;
-        } catch (Exception e) {
-            System.out.println("Erro ao adicionar reserva: " + e.getMessage());
+        String utente = Utils.ScanString("Nif do Utente: ");
+        if (!biblioteca.utentes.verificarNifUtentesNaLista(utente)) {
+            System.out.println("Erro ao adicionar reserva: Nif não encontrado.");
             return false;
         }
+
+        String tituloLivro = Utils.ScanString("Isbn: ");
+        if (!Livros.verificarIsbnNaLista(tituloLivro)) {
+            System.out.println("Erro ao adicionar reserva: Isbn não encontrado.");
+            return false;
+        }
+
+        String dataInicioInput = Utils.ScanString("Data de inicio (yyyy-MM-dd): ");
+        LocalDate dataInicio = validarDataSemTry(dataInicioInput);
+        if (dataInicio == null) {
+            System.out.println("Erro ao adicionar reserva: Data de início inválida.");
+            return false;
+        }
+
+        String dataFimInput = Utils.ScanString("Data de Fim (yyyy-MM-dd): ");
+        LocalDate dataFim = validarDataSemTry(dataFimInput);
+        if (dataFim == null) {
+            System.out.println("Erro ao adicionar reserva: Data de fim inválida.");
+            return false;
+        }
+
+        // Validar as datas
+        if (dataInicio.isAfter(dataFim)) {
+            System.out.println("Erro: A data de início deve ser anterior ou igual à data de fim.");
+            return false;
+        }
+
+        // Criar e adicionar a reserva
+        int numero = listaReservas.size() + 1; // Número auto-incrementado da reserva
+        LocalDate dataRegisto = LocalDate.now(); // Data atual
+        Reserva novaReserva = new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
+        listaReservas.add(novaReserva);
+        System.out.println("Reserva adicionada com sucesso!");
+
+        return true;
+    }
+
+    private LocalDate validarDataSemTry(String dataInput) {
+        if (dataInput == null || dataInput.isEmpty()) {
+            return null;
+        }
+        if (!dataInput.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            return null;
+        }
+        return LocalDate.parse(dataInput);
     }
 
     // Method to list all reservations

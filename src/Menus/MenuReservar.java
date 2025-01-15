@@ -17,7 +17,7 @@ public class MenuReservar {
 
 
     private void Menu() {
-        Reservas Reservas = new Reservas();
+        Reservas Reservas = new Reservas(biblioteca);
         System.out.println("Menu Reservar");
 
         int op = 0;

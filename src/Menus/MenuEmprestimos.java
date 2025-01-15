@@ -10,7 +10,7 @@ public class MenuEmprestimos extends Menu {
 
 
     public MenuEmprestimos(Biblioteca biblioteca) {
-        super("Utentes", new String[]{"Adicionar", "Remover", "Listar", "Editar"}, biblioteca, true);
+        super("Emprestimo", new String[]{"Adicionar", "Remover", "Listar", "Editar"}, biblioteca, true);
         this.biblioteca = biblioteca;
         this.Menu();
     }
