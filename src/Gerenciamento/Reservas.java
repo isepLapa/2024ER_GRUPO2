@@ -1,4 +1,5 @@
 package Gerenciamento;
+import java.time.format.DateTimeFormatter;
 
 import Utils.Utils;
 import java.time.LocalDate;
@@ -16,48 +17,55 @@ public class Reservas {
 
     }
 
+
     public boolean addReserva() {
-        String utente = Utils.ScanString("Nif do Utente: ");
-        if (!biblioteca.utentes.verificarNifUtentesNaLista(utente)) {
-            System.out.println("Erro ao adicionar reserva: Nif não encontrado.");
-            return false;
-        }
-
-        String tituloLivro = Utils.ScanString("Isbn: ");
-        if (!Livros.verificarIsbnNaLista(tituloLivro)) {
-            System.out.println("Erro ao adicionar reserva: Isbn não encontrado.");
-            return false;
-        }
-
-        String dataInicioInput = Utils.ScanString("Data de inicio (yyyy-MM-dd): ");
-        LocalDate dataInicio = validarDataSemTry(dataInicioInput);
-        if (dataInicio == null) {
-            System.out.println("Erro ao adicionar reserva: Data de início inválida.");
-            return false;
-        }
-
-        String dataFimInput = Utils.ScanString("Data de Fim (yyyy-MM-dd): ");
-        LocalDate dataFim = validarDataSemTry(dataFimInput);
-        if (dataFim == null) {
-            System.out.println("Erro ao adicionar reserva: Data de fim inválida.");
-            return false;
-        }
-
-        // Validar as datas
-        if (dataInicio.isAfter(dataFim)) {
-            System.out.println("Erro: A data de início deve ser anterior ou igual à data de fim.");
-            return false;
-        }
-
-        // Criar e adicionar a reserva
-        int numero = listaReservas.size() + 1; // Número auto-incrementado da reserva
-        LocalDate dataRegisto = LocalDate.now(); // Data atual
-        Reserva novaReserva = new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
-        listaReservas.add(novaReserva);
-        System.out.println("Reserva adicionada com sucesso!");
-
-        return true;
+    String utente = Utils.ScanString("Nif do Utente: ");
+    if (!biblioteca.utentes.verificarNifUtentesNaLista(utente)) {
+        System.out.println("Erro ao adicionar reserva: Nif não encontrado.");
+        return false;
     }
+
+    String tituloLivro = Utils.ScanString("Isbn: ");
+    if (!Livros.verificarIsbnNaLista(tituloLivro)) {
+        System.out.println("Erro ao adicionar reserva: Isbn não encontrado.");
+        return false;
+    }
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    String dataInicioInput = Utils.ScanString("Data de início (dd/MM/yyyy): ");
+    LocalDate dataInicio;
+    try {
+        dataInicio = LocalDate.parse(dataInicioInput, formatter);
+    } catch (Exception e) {
+        System.out.println("Erro ao adicionar reserva: Data de início inválida.");
+        return false;
+    }
+
+    String dataFimInput = Utils.ScanString("Data de fim (dd/MM/yyyy): ");
+    LocalDate dataFim;
+    try {
+        dataFim = LocalDate.parse(dataFimInput, formatter);
+    } catch (Exception e) {
+        System.out.println("Erro ao adicionar reserva: Data de fim inválida.");
+        return false;
+    }
+
+    // Validar as datas
+    if (dataInicio.isAfter(dataFim)) {
+        System.out.println("Erro: A data de início deve ser anterior ou igual à data de fim.");
+        return false;
+    }
+
+    // Criar e adicionar a reserva
+    int numero = listaReservas.size() + 1; // Número auto-incrementado da reserva
+    LocalDate dataRegisto = LocalDate.now(); // Data atual
+    Reserva novaReserva = new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
+    listaReservas.add(novaReserva);
+    System.out.println("Reserva adicionada com sucesso!");
+
+    return true;
+}
 
     private LocalDate validarDataSemTry(String dataInput) {
         if (dataInput == null || dataInput.isEmpty()) {
