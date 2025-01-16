@@ -10,6 +10,7 @@ public class Reserva {
     private LocalDate dataRegisto;
     private LocalDate dataInicio;
     private LocalDate dataFim;
+    private String Isbn;
 
     public Reserva(int numero, String utente, String tituloLivro, LocalDate dataRegisto, LocalDate dataInicio, LocalDate dataFim) {
         this.numero = numero;
@@ -31,10 +32,14 @@ public class Reserva {
 //    public List<String> getLivros() {
 //        return livros;
 //    }
-
+    public String getIsbn() {
+        return Isbn;
+    }
     public LocalDate getDataRegisto() {
         return dataRegisto;
     }
+
+    public String getTituloLivros() { return tituloLivros; }
 
     public LocalDate getDataInicio() {
         return dataInicio;

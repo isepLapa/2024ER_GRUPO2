@@ -14,7 +14,11 @@ public class Reservas {
     private Biblioteca biblioteca;
     private Emprestimos emprestimos;
     private Livro livros;
+    private String tituloLivro;
 
+    public String getTituloLivro() {
+        return tituloLivro;
+    }
     // Construtor com apenas biblioteca
     public Reservas(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
@@ -127,22 +131,28 @@ public class Reservas {
             return false;
         }
 
-        if (!Livros.verificarIsbnNaLista(livros.getTitulo())) {
+        String isbnLivro = reserva.getTituloLivros();
+        if (isbnLivro == null || biblioteca == null || biblioteca.livros == null ||
+                !biblioteca.livros.verificarIsbnNaLista(isbnLivro)) {
             System.out.println("Erro: Livro não está disponível para empréstimo.");
             return false;
         }
 
-// Criação do empréstimo
+        // Validar empréstimos
+        if (emprestimos == null || emprestimos.getEmprestimos() == null) {
+            System.out.println("Erro: Emprestimos não inicializado.");
+            return false;
+        }
+
+        // Criar o empréstimo
         int numeroEmprestimo = emprestimos.getEmprestimos().size() + 1;
         String dataInicio = reserva.getDataInicio().toString();
         String dataPrevistaDevolucao = reserva.getDataFim().toString();
         String utente = reserva.getUtente();
-        String tituloLivro = reserva.getUtente();
 
-        Emprestimo novoEmprestimo = new Emprestimo(numeroEmprestimo, dataInicio, utente, dataPrevistaDevolucao, null,tituloLivro);
+        Emprestimo novoEmprestimo = new Emprestimo(numeroEmprestimo, dataInicio, utente, dataPrevistaDevolucao, null, isbnLivro);
         emprestimos.getEmprestimos().add(novoEmprestimo);
 
-// Remove a reserva da lista
         listaReservas.remove(reserva);
 
         System.out.println("Reserva convertida em empréstimo com sucesso!");
