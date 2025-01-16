@@ -23,7 +23,7 @@ public class MenuUtentes extends Menu {
                 biblioteca.utentes.removerUtente();
                 break;
             case 3:
-
+                biblioteca.utentes.alterarUtente();
                 break;
             case 4:
                 biblioteca.utentes.listarUtentes();
