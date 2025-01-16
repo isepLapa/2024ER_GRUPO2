@@ -20,6 +20,10 @@ public class Reserva {
         this.dataFim = dataFim;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
     public int getNumero() {
         return numero;
     }

@@ -68,5 +68,6 @@ public class Bibliotecas {
                 && biblioteca.revistajornais.getRevistas().isEmpty()
                 && biblioteca.utentes.getUtentes().isEmpty()
                 && biblioteca.emprestimos.getEmprestimos().isEmpty();
+//                && biblioteca.reservas.getReservas().isEmpty();
     }
 }

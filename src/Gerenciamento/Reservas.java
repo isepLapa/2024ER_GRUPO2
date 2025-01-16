@@ -1,6 +1,8 @@
 package Gerenciamento;
+import java.nio.file.Path;
 import java.time.format.DateTimeFormatter;
 
+import Storage.Storage;
 import Utils.Utils;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,12 +13,20 @@ public class Reservas {
     Scanner sc = new Scanner(System.in);
     private List<Reserva> listaReservas = new ArrayList<>();
     private Biblioteca biblioteca;
-
+//    private final Storage storage;
+//    private final Path resevasPath;
     public Reservas(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
 
     }
 
+//    public Reservas(Biblioteca biblioteca, String nomeBiblioteca, Storage storage) {
+//        this.biblioteca = biblioteca;
+//        this.storage = storage;
+//
+//        this.resevasPath = Path.of(nomeBiblioteca + "/reservas.txt");
+//        this.listaReservas = this.getReservas();
+//    }
 
     public boolean addReserva() {
     String utente = Utils.ScanString("Nif do Utente: ");
@@ -63,6 +73,8 @@ public class Reservas {
     Reserva novaReserva = new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
     listaReservas.add(novaReserva);
     System.out.println("Reserva adicionada com sucesso!");
+
+//    this.storage.save(this.reservasPath, reservas);
 
     return true;
 }
