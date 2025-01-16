@@ -113,15 +113,15 @@ public class RevistaJornais {
     }
 
     /**
-     * Converte uma lista de strings em uma lista de objetos Livro.
+     * Converte uma lista de strings em uma lista de objetos RevistaJornal.
      *
      * @param revistasStr a lista de strings dos livros
-     * @return uma lista de objetos Livro
+     * @return uma lista de objetos RevistaJornal
      */
     public List<RevistaJornal> convertToRevistaList(List<String> revistasStr) {
         List<RevistaJornal> revistas = new ArrayList<>();
-        for (String livroStr : revistasStr) {
-            revistas.add(parseRevista(livroStr));
+        for (String revistaStr : revistasStr) {
+            revistas.add(parseRevista(revistaStr));
         }
 
         return revistas;
