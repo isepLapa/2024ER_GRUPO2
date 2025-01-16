@@ -44,5 +44,23 @@ public class Utentes {
             x++;
         }
     }
+
+public boolean verificarNifUtentesNaLista(String nif) {
+    if (utentes == null || utentes.isEmpty()) {
+        System.out.println("A lista de utentes está vazia ou não inicializada.");
+        return false;
+    }
+
+    // Percorre a lista de utentes
+    for (Utente utente : utentes) {
+        System.out.println("Comparando NIF: " + utente.getNif() + " com " + nif);
+        if (utente.getNif().equals(nif)) {
+            return true; // Retorna true assim que encontra um NIF correspondente
+        }
+    }
+
+    return false;
+}
+
 }
 
