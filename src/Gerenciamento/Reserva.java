@@ -6,18 +6,22 @@ import java.util.List;
 public class Reserva {
     private int numero;
     private String utente;
-    private String tituloLivros;
+    private String isbn;
     private LocalDate dataRegisto;
     private LocalDate dataInicio;
     private LocalDate dataFim;
 
-    public Reserva(int numero, String utente, String tituloLivro, LocalDate dataRegisto, LocalDate dataInicio, LocalDate dataFim) {
+    public Reserva(int numero, String utente, String isbn, LocalDate dataRegisto, LocalDate dataInicio, LocalDate dataFim) {
         this.numero = numero;
         this.utente = utente;
-        this.tituloLivros = tituloLivro;
+        this.isbn = isbn;
         this.dataRegisto = dataRegisto;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
+    }
+
+    public String getIsbn() {
+        return isbn;
     }
 
     public int getNumero() {
@@ -27,10 +31,6 @@ public class Reserva {
     public String getUtente() {
         return utente;
     }
-
-//    public List<String> getLivros() {
-//        return livros;
-//    }
 
     public LocalDate getDataRegisto() {
         return dataRegisto;
@@ -44,11 +44,35 @@ public class Reserva {
         return dataFim;
     }
 
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public void setUtente(String utente) {
+        this.utente = utente;
+    }
+
+    public void setIsbn(String tituloLivros) {
+        this.isbn = tituloLivros;
+    }
+
+    public void setDataRegisto(LocalDate dataRegisto) {
+        this.dataRegisto = dataRegisto;
+    }
+
+    public void setDataInicio(LocalDate dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public void setDataFim(LocalDate dataFim) {
+        this.dataFim = dataFim;
+    }
+
     @Override
     public String toString() {
         return "Reserva N.º " + numero + "\n" +
                 "Utente: " + utente + "\n" +
-                "Livros: " + tituloLivros + "\n" +
+                "Livros: " + isbn + "\n" +
                 "Data de Registo: " + dataRegisto + "\n" +
                 "Data de Início: " + dataInicio + "\n" +
                 "Data de Fim: " + dataFim + "\n";
