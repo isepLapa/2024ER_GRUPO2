@@ -11,7 +11,7 @@ public class RevistaJornais {
     private final Storage storage;
 
     private final Path revistasPath;
-    private List<String> revistas;
+    private List<RevistaJornal> revistas  = new ArrayList<>();;
 
     public RevistaJornais(String biblioteca, Storage storage) {
         this.biblioteca = biblioteca;
@@ -36,26 +36,31 @@ public class RevistaJornais {
         String titulo = Utils.ScanString("Título do Jornal/Revista: ");
         String editora = Utils.ScanString("Editora do Jornal/Revista: ");
         String categoria = Utils.ScanString("Categoria do Jornal/Revista: ");
-        String issn = Utils.validarIssn(Utils.ScanString("Introduza o ISSN: "));
-        String dataPublicacao = Utils.validarData(Utils.ScanString("Data de Publicação (dd/MM/yyyy): "));
+        String issn = Utils.validarIssn("Introduza o ISSN: ");
+        String dataPublicacao = Utils.validarData("Data de Publicação (dd/MM/yyyy): ");
 
         RevistaJornal revista = new RevistaJornal(titulo, editora, categoria, dataPublicacao, issn);
-        revistas.add(revista.toString());
+        revistas.add(revista);
         this.storage.save(this.revistasPath, revistas);
         System.out.println("Revista ou Jornal adicionado com sucesso!");
     }
 
+
     public void removerRevista() {
-        String titulo = Utils.ScanString("Título da Revista/Jornal: ");
-        revistas = revistas.stream()
-                .filter(revista -> !revista.contains("titulo=" + titulo))
-                .collect(Collectors.toList());
+        String ISSN = Utils.validarIssn("Digite o ISBN da revista que deseja remover: ");
+
+        revistas.removeIf(revista -> revista.getIsnn().equals(ISSN));
+
         this.storage.save(this.revistasPath, revistas);
         System.out.println("Revista ou Jornal removido com sucesso!");
     }
 
     public void alterarRevista() {
-        listarRevistas();
+        if (revistas.isEmpty()) {
+            System.out.println("Não existem revistas ou jornais na biblioteca " + this.biblioteca);
+            return;
+        }
+
         int escolha = Utils.TransformarListaEmEscolha("Escolha o índice da Revista/Jornal que deseja alterar: ", revistas);
 
         if (escolha < 0 || escolha >= revistas.size()) {
@@ -63,28 +68,22 @@ public class RevistaJornais {
             return;
         }
 
-        String revistaSelecionada = revistas.get(escolha);
-        System.out.println("Revista/Jornal selecionado: " + revistaSelecionada);
-
-        RevistaJornal revista = this.parseRevista(revistaSelecionada);
-
         int opcao = Utils.ScanInt("""
-                Escolha o campo a alterar:
-                1 - Título
-                2 - Editora
-                3 - Categoria
-                4 - Data de Publicação
-                5 - ISSN""");
+            Escolha o campo a alterar:
+            1 - Título
+            2 - Editora
+            3 - Categoria
+            4 - Data de Publicação
+            5 - ISSN""");
         switch (opcao) {
-            case 1 -> revista.setTitulo(Utils.ScanString("Novo título: "));
-            case 2 -> revista.setEditora(Utils.ScanString("Nova editora: "));
-            case 3 -> revista.setCategoria(Utils.ScanString("Nova categoria: "));
-            case 4 -> revista.setDatapub(Utils.ScanString("Nova data de publicação (dd/MM/yyyy): "));
-            case 5 -> revista.setIsnn(Utils.ScanString("Novo ISSN: "));
+            case 1 -> revistas.get(escolha).setTitulo(Utils.ScanString("Novo título: "));
+            case 2 -> revistas.get(escolha).setEditora(Utils.ScanString("Nova editora: "));
+            case 3 -> revistas.get(escolha).setCategoria(Utils.ScanString("Nova categoria: "));
+            case 4 -> revistas.get(escolha).setDatapub(Utils.validarData("Nova data de publicação (dd/MM/yyyy): "));
+            case 5 -> revistas.get(escolha).setIsnn(Utils.validarIssn("Novo ISSN: "));
             default -> System.out.println("Opção inválida!");
         }
 
-        revistas.set(escolha, revista.toString());
         this.storage.save(this.revistasPath, revistas);
         System.out.println("Revista/Jornal alterado com sucesso!");
     }
@@ -105,8 +104,26 @@ public class RevistaJornais {
         return new RevistaJornal(titulo, editora, categoria, datapub, issn);
     }
 
-    public List<String> getRevistas() {
-        List<String> revistasSalvas = storage.get(this.revistasPath);
-        return revistasSalvas != null ? revistasSalvas : new ArrayList<>();
+    public List<RevistaJornal> getRevistas() {
+        if(revistas.isEmpty()) {
+            return this.convertToRevistaList(storage.get(this.revistasPath));
+        }
+
+        return revistas;
+    }
+
+    /**
+     * Converte uma lista de strings em uma lista de objetos RevistaJornal.
+     *
+     * @param revistasStr a lista de strings dos livros
+     * @return uma lista de objetos RevistaJornal
+     */
+    public List<RevistaJornal> convertToRevistaList(List<String> revistasStr) {
+        List<RevistaJornal> revistas = new ArrayList<>();
+        for (String revistaStr : revistasStr) {
+            revistas.add(parseRevista(revistaStr));
+        }
+
+        return revistas;
     }
 }

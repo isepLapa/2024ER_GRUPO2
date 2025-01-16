@@ -41,7 +41,7 @@ public class Emprestimos {
         int numero = emprestimos.isEmpty() ? 1 : emprestimos.stream().mapToInt(Emprestimo::getNumero).max().getAsInt() + 1;
         System.out.println("Número do empréstimo que irá ser criado: " + numero + "\n -------------------------------");
         String dataInicio = Utils.validarData("Data de início (dd/MM/yyyy): ");
-        String utente = Utils.verificarSeItemExiste("Utente NIF: ", biblioteca.livros.getLivros(), Livro::getIsbn);
+        String utente = Utils.verificarSeItemExiste("Utente NIF: ", biblioteca.utentes.getUtentes(), Utente::getNif);
         String dataPrevistaDevolucao = Utils.validarData("Data prevista de devolução: ");
         String dataEfetivaDevolucao = Utils.validarData("Data efetiva de devolução: ");
         String livros = Utils.ScanString("Livros: ");

@@ -21,10 +21,9 @@ public class Biblioteca {
     private void IniciarBiblioteca() {
 
         this.livros = new Livros(this.nome, this.storage);
-
-        this.utentes = new Utentes();
         this.revistajornais = new RevistaJornais(this.nome, this.storage);
 
+        this.utentes = new Utentes(this, this.nome, this.storage);
         this.emprestimos = new Emprestimos(this, this.nome, this.storage);
 
     }

@@ -12,11 +12,7 @@ public class Utente {
 
     public Utente(String nome, String nif,
                   String genero, String contacto) {
-        while (!nifValido(nif)) {
-            System.out.println("insira o NIF novamente : ");
-            nif = sc.next();
-            setNif(nif);
-        }
+
         this.nome = nome;
         this.nif = nif;
         this.genero = genero;
@@ -65,10 +61,11 @@ public class Utente {
     @Override
     public String toString() {
         return
-                "nif='" + nif + '\n' +
-                        "nome='" + nome + '\n' +
-                        "genero='" + genero + '\n' +
-                        "contacto='" + contacto;
+                "nif=" + nif + " " +
+                        "nome=" + nome + " " +
+                        "genero=" + genero + " " +
+                        "contacto=" + contacto;
+
     }
 
 
