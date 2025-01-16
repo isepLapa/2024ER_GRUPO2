@@ -10,7 +10,7 @@ public class MenuEmprestimos extends Menu {
 
 
     public MenuEmprestimos(Biblioteca biblioteca) {
-        super("Emprestimo", new String[]{"Adicionar", "Remover", "Listar", "Editar"}, biblioteca, true);
+        super("Emprestimos", new String[]{"Adicionar", "Remover", "Listar", "Editar"}, biblioteca, true);
         this.biblioteca = biblioteca;
         this.Menu();
     }
@@ -20,16 +20,16 @@ public class MenuEmprestimos extends Menu {
         renderMenu();
         switch (validateUserInput()) {
             case 1:
-
+                biblioteca.emprestimos.AdicionarEmprestimo();
                 break;
             case 2:
-
+                biblioteca.emprestimos.RemoverEmprestimo();
                 break;
             case 3:
-
+                biblioteca.emprestimos.ListarEmprestimos();
                 break;
             case 4:
-
+                biblioteca.emprestimos.AlterarEmprestimo();
                 break;
             default:
                 System.out.println("opção invalida");
