@@ -64,9 +64,9 @@ public class Bibliotecas {
     private boolean isBibliotecaVazia(String nomeBiblioteca) {
         Biblioteca biblioteca = new Biblioteca(nomeBiblioteca, storage);
 
-        if (biblioteca.livros.getLivros().isEmpty() && biblioteca.revistajornais.getRevistas().isEmpty()) {
-            return true;
-        }
-        return false;
+        return biblioteca.livros.getLivros().isEmpty()
+                && biblioteca.revistajornais.getRevistas().isEmpty()
+                && biblioteca.utentes.getUtentes().isEmpty()
+                && biblioteca.emprestimos.getEmprestimos().isEmpty();
     }
 }

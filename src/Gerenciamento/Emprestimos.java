@@ -6,6 +6,7 @@ import Utils.Utils;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -41,7 +42,7 @@ public class Emprestimos {
         int numero = emprestimos.isEmpty() ? 1 : emprestimos.stream().mapToInt(Emprestimo::getNumero).max().getAsInt() + 1;
         System.out.println("Número do empréstimo que irá ser criado: " + numero + "\n -------------------------------");
         String dataInicio = Utils.validarData("Data de início (dd/MM/yyyy): ");
-        String utente = Utils.verificarSeItemExiste("Utente NIF: ", biblioteca.livros.getLivros(), Livro::getIsbn);
+        String nif = Utils.verificarSeItemExiste("Utente NIF: ", biblioteca.utentes.getUtentes(), Utente::getNif);
         String dataPrevistaDevolucao = Utils.validarData("Data prevista de devolução: ");
         String dataEfetivaDevolucao = Utils.validarData("Data efetiva de devolução: ");
         String livros = Utils.ScanString("Livros: ");
@@ -49,7 +50,7 @@ public class Emprestimos {
 
 
 
-        Emprestimo emprestimo = new Emprestimo(numero, dataInicio, utente, dataPrevistaDevolucao, dataEfetivaDevolucao, livros);
+        Emprestimo emprestimo = new Emprestimo(numero, dataInicio, nif, dataPrevistaDevolucao, dataEfetivaDevolucao, livros);
         emprestimos.add(emprestimo);
 
         this.storage.save(this.emprestimosPath, emprestimos);
@@ -82,7 +83,7 @@ public class Emprestimos {
                 emprestimos.get(escolha).setDataInicio(Utils.validarData("Nova data de início: "));
                 break;
             case 2:
-                emprestimos.get(escolha).setUtente(Utils.ScanString("Novo utente: "));
+                emprestimos.get(escolha).setNif(Utils.ScanString("Novo Nif: "));
                 break;
             case 3:
                 emprestimos.get(escolha).setDataPrevistaDevolucao(Utils.validarData("Nova data prevista de devolução: "));
@@ -112,8 +113,8 @@ public class Emprestimos {
 
         List<Emprestimo> emprestimosFiltrados = new ArrayList<>();
         for (Emprestimo emprestimo : emprestimos) {
-            if (emprestimo.getUtente().equals(utenteNIF)) {
-                nomeUtente = emprestimo.getUtente();
+            if (emprestimo.getNif().equals(utenteNIF)) {
+                nomeUtente = emprestimo.getNif();
 
                 LocalDate dataEmprestimo = LocalDate.parse(emprestimo.getDataInicio(), formatter);
                 if ((dataEmprestimo.isEqual(dataInicio) || dataEmprestimo.isAfter(dataInicio)) &&
@@ -152,6 +153,31 @@ public class Emprestimos {
     public List<Emprestimo> getEmprestimos() {
         return this.convertToEmprestimoList(storage.get(this.emprestimosPath));
     }
+
+
+    public void listarUtentesComAtraso() {
+        int diasAtraso = Utils.ScanInt("Digite o número de dias de atraso: ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        List<String> utentesComAtraso = new ArrayList<>();
+        for (Emprestimo emprestimo : emprestimos) {
+            LocalDate dataPrevistaDevolucao = LocalDate.parse(emprestimo.getDataPrevistaDevolucao(), formatter);
+            LocalDate dataEfetivaDevolucao = LocalDate.parse(emprestimo.getDataEfetivaDevolucao(), formatter);
+
+            long diasDeAtraso = ChronoUnit.DAYS.between(dataPrevistaDevolucao, dataEfetivaDevolucao);
+            if (diasDeAtraso > diasAtraso) {
+                utentesComAtraso.add(biblioteca.utentes.getUtenteByNif(emprestimo.getNif()));
+            }
+        }
+
+        if (utentesComAtraso.isEmpty()) {
+            System.out.println("Nenhum utente tem devoluçoes com atraso superior a " + diasAtraso + " dias.");
+        } else {
+            System.out.println("Utentes com devoluções com atraso superior a " + diasAtraso + " dias:");
+            utentesComAtraso.forEach(System.out::println);
+        }
+    }
+
 
     /**
      * Converte uma lista de strings em uma lista de objetos Emprestimo.

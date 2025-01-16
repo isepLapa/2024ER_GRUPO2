@@ -107,6 +107,20 @@ public class Utils {
         } while (true);
     }
 
+    public static String validaNif(String mensagem) {
+        String nif;
+        do {
+            nif = Utils.ScanString(mensagem);
+            if (nif.isBlank()) {
+                System.out.println("Este campo é obrigatório, por favor introduza um valor válido.");
+            } else if (!nif.matches("\\d{9}")) {
+                System.out.println("Por favor, insira um NIF válido com 9 dígitos.");
+            } else {
+                return nif;
+            }
+        } while (true);
+    }
+
     /**
      * Verifica se um item já existe numa lista.
      *
