@@ -61,8 +61,8 @@ public class Utente {
     @Override
     public String toString() {
         return
+                "nome=" + nome + " " +
                 "nif=" + nif + " " +
-                        "nome=" + nome + " " +
                         "genero=" + genero + " " +
                         "contacto=" + contacto;
 
