@@ -223,4 +223,16 @@ public class Livros{
             return false;
         }
     }
+    public static boolean verificarIsbnNaLista(String isbn) {
+        // Percorre a lista de livros e compara o ISBN de cada livro
+        for (Livro livro : livros) {
+            if (livro.getIsbn().equals(isbn)) {
+                return true; // ISBN encontrado, retorna true
+            }
+
+        }
+        System.out.println("ISBN não encontrado !");
+        return false; // ISBN não encontrado, retorna false
+    }
+
 }
