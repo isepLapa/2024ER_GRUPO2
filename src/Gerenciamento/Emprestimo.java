@@ -52,6 +52,10 @@ public class Emprestimo {
         return dataPrevistaDevolucao;
     }
 
+    public String getLivros() {
+        return livros;
+    }
+
     public void setDataPrevistaDevolucao(String dataPrevistaDevolucao) {
         this.dataPrevistaDevolucao = dataPrevistaDevolucao;
     }

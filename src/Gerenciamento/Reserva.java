@@ -28,9 +28,9 @@ public class Reserva {
         return utente;
     }
 
-//    public List<String> getLivros() {
-//        return livros;
-//    }
+    public String getLivros() {
+        return tituloLivros;
+    }
 
     public LocalDate getDataRegisto() {
         return dataRegisto;
@@ -47,7 +47,7 @@ public class Reserva {
     @Override
     public String toString() {
         return "Reserva N.º " + numero + "\n" +
-                "Utente: " + utente + "\n" +
+                "UUtentetente: " + utente + "\n" +
                 "Livros: " + tituloLivros + "\n" +
                 "Data de Registo: " + dataRegisto + "\n" +
                 "Data de Início: " + dataInicio + "\n" +

@@ -1,6 +1,9 @@
 package Gerenciamento;
 
+import Storage.Storage;
 import Utils.Utils;
+
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +11,18 @@ import java.util.Scanner;
 
 public class Reservas {
     Scanner sc = new Scanner(System.in);
-    private List<Reserva> listaReservas = new ArrayList<>();
+    private final Storage storage;
+    private final Path reservasPath;
+    private List<Reserva> reservas = new ArrayList<>();
     private Biblioteca biblioteca;
 
-    public Reservas(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
 
+    public Reservas(Biblioteca biblioteca, String nomeBiblioteca, Storage storage) {
+        this.biblioteca = biblioteca;
+        this.storage = storage;
+
+        this.reservasPath = Path.of(nomeBiblioteca + "/reservas.txt");
+        this.reservas = this.getReservas();
     }
 
     public boolean addReserva() {
@@ -50,10 +59,10 @@ public class Reservas {
         }
 
         // Criar e adicionar a reserva
-        int numero = listaReservas.size() + 1; // Número auto-incrementado da reserva
+        int numero = reservas.size() + 1; // Número auto-incrementado da reserva
         LocalDate dataRegisto = LocalDate.now(); // Data atual
         Reserva novaReserva = new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
-        listaReservas.add(novaReserva);
+        reservas.add(novaReserva);
         System.out.println("Reserva adicionada com sucesso!");
 
         return true;
@@ -71,19 +80,19 @@ public class Reservas {
 
     // Method to list all reservations
     public void listarReservas() {
-        if (listaReservas.isEmpty()) {
+        if (reservas.isEmpty()) {
             System.out.println("Não há reservas registradas.");
             return;
         }
 
-        for (Reserva reserva : listaReservas) {
+        for (Reserva reserva : reservas) {
             System.out.println(reserva);
         }
     }
 
     // Method to find a reservation by its number
     public Reserva buscarReserva(int numero) {
-        for (Reserva reserva : listaReservas) {
+        for (Reserva reserva : reservas) {
             if (reserva.getNumero() == numero) {
                 return reserva;
             }
@@ -100,7 +109,7 @@ public class Reservas {
         // Buscar e remover a reserva
         Reserva reserva = buscarReserva(numero);
         if (reserva != null) {
-            listaReservas.remove(reserva);
+            reservas.remove(reserva);
             System.out.println("Reserva N.º " + numero + " removida com sucesso.");
             return true;
         }
@@ -108,6 +117,49 @@ public class Reservas {
         return false;
     }
 
+    public List<Reserva> getReservas() {
+        if(reservas.isEmpty()) {
+            return this.convertToReservasList(storage.get(this.reservasPath));
+        }
+
+        return reservas;
+    }
+
+    /**
+     * Converte uma lista de strings em uma lista de objetos Reservas.
+     *
+     * @param reservasStr a lista de strings dos livros
+     * @return uma lista de objetos Reservas
+     */
+    public List<Reserva> convertToReservasList(List<String> reservasStr) {
+        List<Reserva> reservas = new ArrayList<>();
+        for (String reservaStr : reservasStr) {
+            reservas.add(parseReserva(reservaStr));
+        }
+        return reservas;
+    }
+
+    private Reserva parseReserva(String reserva) {
+        String[] partesReserva = reserva.split(" ");
+        int numero = Integer.parseInt(partesReserva[0].split("=")[1]);
+        String utente = partesReserva[1].split("=")[1];
+        String tituloLivro = partesReserva[2].split("=")[1];
+        LocalDate dataRegisto = LocalDate.parse(partesReserva[3].split("=")[1]);
+        LocalDate dataInicio = LocalDate.parse(partesReserva[4].split("=")[1]);
+        LocalDate dataFim = LocalDate.parse(partesReserva[5].split("=")[1]);
+
+        return new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
+    }
+
+    public Boolean reservaExiste(String isbn) {
+        for (Reserva reserva : reservas) {
+            if (reserva.getLivros().contains(isbn)) {
+                return true;
+            }
+        }
+        System.out.println("Reserva com ISBN " + isbn + " não encontrada.");
+        return false;
+    }
 
 }
 
