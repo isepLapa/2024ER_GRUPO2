@@ -58,6 +58,7 @@ public class MenuReservar {
                     break;
                 case 4:
                     Utils.printTituloPagina("Alterar Reserva");
+                    Reservas.alterarReserva();
                     break;
 
                 case 5:
