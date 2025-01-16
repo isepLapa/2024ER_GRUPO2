@@ -26,6 +26,7 @@ public class Biblioteca {
         this.revistajornais = new RevistaJornais(this.nome, this.storage);
 
         this.emprestimos = new Emprestimos(this, this.nome, this.storage);
+
     }
 
 }
