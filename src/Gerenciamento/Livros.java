@@ -55,7 +55,7 @@ public class Livros{
             return;
         }
 
-        String isbn = validarISBN(Utils.ScanString("Digite o ISBN do livro que deseja remover: "));
+        String isbn = Utils.ScanString("Digite o ISBN do livro que deseja remover: ");
 
         livros.removeIf(livro -> livro.getIsbn().equals(isbn));
 
