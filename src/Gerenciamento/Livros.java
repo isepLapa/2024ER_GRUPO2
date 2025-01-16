@@ -14,7 +14,7 @@ public class Livros{
     private final Storage storage;
 
     private final Path livrosPath;
-    private static List<Livro> livros;
+    private static List<Livro> livros = new ArrayList<>();
 
     public Livros(String biblioteca, Storage storage) {
         this.biblioteca = biblioteca;
@@ -50,14 +50,24 @@ public class Livros{
     }
 
     public void RemoverLivro() {
-        String nome = Utils.ScanString("Nome do livro: ");
+        if(livros.isEmpty()) {
+            System.out.println("Não existem livros na biblioteca " + this.biblioteca);
+            return;
+        }
 
-        livros.removeIf(livro -> livro.getTitulo().equals(nome));
+        String isbn = validarISBN(Utils.ScanString("Digite o ISBN do livro que deseja remover: "));
+
+        livros.removeIf(livro -> livro.getIsbn().equals(isbn));
 
         this.storage.save(this.livrosPath, livros);
     }
 
     public void AlterarLivro() {
+        if (livros.isEmpty()) {
+            System.out.println("Não existem livros na biblioteca " + this.biblioteca);
+            return;
+        }
+
         int escolha = Utils.TransformarListaEmEscolha("Escolha o índice do livro que deseja alterar: ", livros);
 
         Scanner sc = new Scanner(System.in);
@@ -117,7 +127,11 @@ public class Livros{
     }
 
     public List<Livro> getLivros() {
-        return this.convertToLivroList(storage.get(this.livrosPath));
+        if(livros.isEmpty()) {
+            return this.convertToLivroList(storage.get(this.livrosPath));
+        }
+
+        return livros;
     }
 
     /**
