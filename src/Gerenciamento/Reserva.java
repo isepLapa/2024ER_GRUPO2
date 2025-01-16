@@ -7,11 +7,11 @@ public class Reserva {
     private int numero;
     private String utente;
     private String isbn;
-    private LocalDate dataRegisto;
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
+    private String dataRegisto;
+    private String dataInicio;
+    private String dataFim;
 
-    public Reserva(int numero, String utente, String isbn, LocalDate dataRegisto, LocalDate dataInicio, LocalDate dataFim) {
+    public Reserva(int numero, String utente, String isbn, String dataRegisto, String dataInicio, String dataFim) {
         this.numero = numero;
         this.utente = utente;
         this.isbn = isbn;
@@ -32,15 +32,15 @@ public class Reserva {
         return utente;
     }
 
-    public LocalDate getDataRegisto() {
+    public String getDataRegisto() {
         return dataRegisto;
     }
 
-    public LocalDate getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public LocalDate getDataFim() {
+    public String getDataFim() {
         return dataFim;
     }
 
@@ -56,15 +56,15 @@ public class Reserva {
         this.isbn = tituloLivros;
     }
 
-    public void setDataRegisto(LocalDate dataRegisto) {
+    public void setDataRegisto(String dataRegisto) {
         this.dataRegisto = dataRegisto;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public void setDataFim(LocalDate dataFim) {
+    public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
 

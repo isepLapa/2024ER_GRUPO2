@@ -67,7 +67,7 @@ public class Bibliotecas {
         return biblioteca.livros.getLivros().isEmpty()
                 && biblioteca.revistajornais.getRevistas().isEmpty()
                 && biblioteca.utentes.getUtentes().isEmpty()
-                && biblioteca.emprestimos.getEmprestimos().isEmpty();
-//                && biblioteca.reservas.getReservas().isEmpty();
+                && biblioteca.emprestimos.getEmprestimos().isEmpty()
+                && biblioteca.reservas.getReservas().isEmpty();
     }
 }

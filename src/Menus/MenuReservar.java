@@ -28,7 +28,7 @@ public class MenuReservar extends Menu {
                 biblioteca.reservas.listarReservas();
                 break;
             case 4:
-                //biblioteca.reservas.();
+                biblioteca.reservas.alterarReserva();
                 break;
             default:
                 System.out.println("Opção inválida");

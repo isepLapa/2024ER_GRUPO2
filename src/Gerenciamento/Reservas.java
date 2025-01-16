@@ -38,22 +38,12 @@ public class Reservas {
             return false;
         }
 
-        String dataInicioInput = Utils.ScanString("Data de inicio (yyyy-MM-dd): ");
-        LocalDate dataInicio = validarDataSemTry(dataInicioInput);
-        if (dataInicio == null) {
-            System.out.println("Erro ao adicionar reserva: Data de início inválida.");
-            return false;
-        }
+        String dataInicioInput = Utils.validarData("Data de inicio (dd/mm/yyyy): ");
 
-        String dataFimInput = Utils.ScanString("Data de Fim (yyyy-MM-dd): ");
-        LocalDate dataFim = validarDataSemTry(dataFimInput);
-        if (dataFim == null) {
-            System.out.println("Erro ao adicionar reserva: Data de fim inválida.");
-            return false;
-        }
+        String dataFimInput = Utils.validarData("Data de Fim (dd/mm/yyyy): ");
 
         // Validar as datas
-        if (dataInicio.isAfter(dataFim)) {
+        if (LocalDate.parse(dataInicioInput).isAfter(LocalDate.parse(dataFimInput))) {
             System.out.println("Erro: A data de início deve ser anterior ou igual à data de fim.");
             return false;
         }
@@ -61,10 +51,11 @@ public class Reservas {
         // Criar e adicionar a reserva
         int numero = reservas.size() + 1; // Número auto-incrementado da reserva
         LocalDate dataRegisto = LocalDate.now(); // Data atual
-        Reserva novaReserva = new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
+        Reserva novaReserva = new Reserva(numero, utente, tituloLivro, dataRegisto.toString(), dataInicioInput, dataFimInput);
         reservas.add(novaReserva);
         System.out.println("Reserva adicionada com sucesso!");
 
+        this.storage.save(this.reservasPath, reservas);
         return true;
     }
 
@@ -103,18 +94,67 @@ public class Reservas {
 
     // Method to remove a reservation by its number
     public boolean removerReserva() {
-        // Solicitar ao usuário que insira o número da reserva
-        System.out.print("Digite o número da reserva que deseja remover: ");
-        int numero = sc.nextInt();
-        // Buscar e remover a reserva
+        if (reservas.isEmpty()) {
+            System.out.println("Não há reservas registradas.");
+            return false;
+        }
+
+        int numero = Utils.ScanInt("Digite o número da reserva que deseja remover: ");
         Reserva reserva = buscarReserva(numero);
         if (reserva != null) {
             reservas.remove(reserva);
             System.out.println("Reserva N.º " + numero + " removida com sucesso.");
+            this.storage.save(this.reservasPath, reservas);
             return true;
         }
         System.out.println("Não foi possível remover a reserva. Número não encontrado.");
         return false;
+    }
+
+    public boolean alterarReserva() {
+        if (reservas.isEmpty()) {
+            System.out.println("Não há reservas registradas.");
+            return false;
+        }
+
+        int numero = Utils.ScanInt("Digite o número da reserva que deseja alterar: ");
+        Reserva reserva = buscarReserva(numero);
+        if (reserva == null) {
+            System.out.println("Reserva com número " + numero + " não encontrada.");
+            return false;
+        }
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Escolha o campo que deseja alterar:");
+        System.out.println("1 - Nif do Utente");
+        System.out.println("2 - ISBN do Livro");
+        System.out.println("3 - Data de Início");
+        System.out.println("4 - Data de Fim");
+
+        int op = sc.nextInt();
+        sc.nextLine();
+
+        switch (op) {
+            case 1:
+                reserva.setUtente(Utils.ScanString("Novo Nif do Utente: "));
+                break;
+            case 2:
+                reserva.setIsbn(Utils.ScanString("Novo ISBN do Livro: "));
+                break;
+            case 3:
+                reserva.setDataInicio(Utils.validarData("Nova data Inicio"));
+                break;
+            case 4:
+                reserva.setDataFim(Utils.validarData("Nova data Inicio"));
+                break;
+            default:
+                System.out.println("Opção inválida! Por favor, escolha entre 1 e 4.");
+                return false;
+        }
+
+        this.storage.save(this.reservasPath, reservas);
+        System.out.println("Reserva alterada com sucesso!");
+        return true;
     }
 
     public List<Reserva> getReservas() {
@@ -144,16 +184,16 @@ public class Reservas {
         int numero = Integer.parseInt(partesReserva[0].split("=")[1]);
         String utente = partesReserva[1].split("=")[1];
         String tituloLivro = partesReserva[2].split("=")[1];
-        LocalDate dataRegisto = LocalDate.parse(partesReserva[3].split("=")[1]);
-        LocalDate dataInicio = LocalDate.parse(partesReserva[4].split("=")[1]);
-        LocalDate dataFim = LocalDate.parse(partesReserva[5].split("=")[1]);
+        String dataRegisto = partesReserva[3].split("=")[1];
+        String dataInicio = partesReserva[4].split("=")[1];
+        String dataFim = partesReserva[5].split("=")[1];
 
         return new Reserva(numero, utente, tituloLivro, dataRegisto, dataInicio, dataFim);
     }
 
     public Boolean reservaExiste(String isbn) {
         for (Reserva reserva : reservas) {
-            if (reserva.getLivros().contains(isbn)) {
+            if (reserva.getIsbn().contains(isbn)) {
                 return true;
             }
         }

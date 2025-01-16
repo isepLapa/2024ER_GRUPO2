@@ -43,20 +43,7 @@ public class Emprestimos {
         int numero = emprestimos.isEmpty() ? 1 : emprestimos.stream().mapToInt(Emprestimo::getNumero).max().getAsInt() + 1;
         System.out.println("Número do empréstimo que irá ser criado: " + numero + "\n -------------------------------");
         String dataInicio = Utils.validarData("Data de início (dd/MM/yyyy): ");
-        String nif;
-
-        do {
-            nif = Utils.ScanString("NIF do Utente: ");
-            if (!Utils.validarNifSemLoop(nif)) {
-                System.out.println("NIF inválido.");
-                continue;
-            }
-            if (Utils.verificarSeItemNaoExiste("NIF do Utente: ", biblioteca.utentes.getUtentes(), Utente::getNif).equals(nif)) {
-                System.out.println("Utente não encontrado.");
-                continue;
-            }
-            break;
-        } while (true);
+        String nif = Utils.verificarSeItemExiste("NIF do Utente: ", biblioteca.utentes.getUtentes(), Utente::getNif);
 
         String dataPrevistaDevolucao = Utils.validarData("Data prevista de devolução: ");
         String dataEfetivaDevolucao = Utils.validarData("Data efetiva de devolução: ");
