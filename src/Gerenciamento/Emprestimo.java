@@ -3,15 +3,15 @@ package Gerenciamento;
 public class Emprestimo {
     private int numero;
     private String dataInicio;
-    private String utente;
+    private String nif;
     private String dataPrevistaDevolucao;
     private String dataEfetivaDevolucao;
     private String livros;
 
-    public Emprestimo(int numero, String dataInicio, String utente, String dataPrevistaDevolucao, String dataEfetivaDevolucao, String livros) {
+    public Emprestimo(int numero, String dataInicio, String nif, String dataPrevistaDevolucao, String dataEfetivaDevolucao, String livros) {
         this.numero = numero;
         this.dataInicio = dataInicio;
-        this.utente = utente;
+        this.nif = nif;
         this.dataPrevistaDevolucao = dataPrevistaDevolucao;
         this.dataEfetivaDevolucao = dataEfetivaDevolucao;
         this.livros = livros;
@@ -40,12 +40,12 @@ public class Emprestimo {
         this.dataInicio = dataInicio;
     }
 
-    public String getUtente() {
-        return utente;
+    public String getNif() {
+        return nif;
     }
 
-    public void setUtente(String utente) {
-        this.utente = utente;
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
     public String getDataPrevistaDevolucao() {
@@ -68,7 +68,7 @@ public class Emprestimo {
     public String toString() {
         return "numero=" + numero + " " +
                 "dataInicio=" + dataInicio + " " +
-                "utente=" + utente + " " +
+                "nif=" + nif + " " +
                 "dataPrevistaDevolucao=" + dataPrevistaDevolucao + " " +
                 "dataEfetivaDevolucao=" + dataEfetivaDevolucao + " " +
                 "livros=" + livros;
