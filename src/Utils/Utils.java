@@ -107,6 +107,15 @@ public class Utils {
         } while (true);
     }
 
+    public static Boolean validarNifSemLoop(String nif) {
+        if (!nif.matches("\\d{9}")) {
+            System.out.println("Por favor, insira um NIF válido com 9 dígitos.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static String validaNif(String mensagem) {
         String nif;
         do {
@@ -144,6 +153,35 @@ public class Utils {
                 if (atributo.apply(item).equals(query)) {
                     System.out.println("O item já existe. Por favor, insira um valor diferente.");
                     flag = true;
+                    break;
+                }
+            }
+        } while (flag);
+        return query;
+    }
+
+    /**
+     * Verifica se um item não existe numa lista.
+     *
+     * @param mensagem a mensagem a ser mostrada para o utilizador
+     * @param items a lista de items a ser verificada
+     * @param atributo a função que retorna o atributo a ser comparado
+     * @param <T> o tipo genérico da lista
+     * @return o item escolhido pelo utilizador
+     *
+     * @Example Validação de item inexistente:
+     * <br>
+     * <code>String titulo = Utils.verificarSeItemNaoExiste("Título do Jornal/Revista: ", revistas, RevistaJornal::getTitulo, "O item não existe. Por favor, insira um valor diferente.");</code>
+     */
+    public static <T> String verificarSeItemNaoExiste(String mensagem, List<T> items, Function<T, String> atributo) {
+        String query;
+        boolean flag;
+        do {
+            query = Utils.ScanString(mensagem);
+            flag = true;
+            for (T item : items) {
+                if (atributo.apply(item).equals(query)) {
+                    flag = false;
                     break;
                 }
             }

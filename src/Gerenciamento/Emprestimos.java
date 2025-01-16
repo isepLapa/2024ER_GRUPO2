@@ -39,18 +39,53 @@ public class Emprestimos {
     }
 
     public void AdicionarEmprestimo() {
+        boolean flag = false;
         int numero = emprestimos.isEmpty() ? 1 : emprestimos.stream().mapToInt(Emprestimo::getNumero).max().getAsInt() + 1;
         System.out.println("Número do empréstimo que irá ser criado: " + numero + "\n -------------------------------");
         String dataInicio = Utils.validarData("Data de início (dd/MM/yyyy): ");
-        String nif = Utils.verificarSeItemExiste("Utente NIF: ", biblioteca.utentes.getUtentes(), Utente::getNif);
+        String nif;
+
+        do {
+            nif = Utils.ScanString("NIF do Utente: ");
+            if (!Utils.validarNifSemLoop(nif)) {
+                System.out.println("NIF inválido.");
+                continue;
+            }
+            if (Utils.verificarSeItemNaoExiste("NIF do Utente: ", biblioteca.utentes.getUtentes(), Utente::getNif).equals(nif)) {
+                System.out.println("Utente não encontrado.");
+                continue;
+            }
+            break;
+        } while (true);
+
         String dataPrevistaDevolucao = Utils.validarData("Data prevista de devolução: ");
         String dataEfetivaDevolucao = Utils.validarData("Data efetiva de devolução: ");
-        String livros = Utils.ScanString("Livros: ");
+        int numLivros = Utils.ScanInt("Número de livros a reservar: ");
+        StringBuilder livros = new StringBuilder();
+
+        for (int i = 0; i < numLivros; i++) {
+            while (true) {
+                String isbn = Utils.ScanString("ISBN do livro " + (i + 1) + ": ");
+                if (!Livros.verificarIsbnNaLista(isbn)) {
+                    System.out.println("Erro ao adicionar empréstimo: ISBN " + isbn + " não encontrado.");
+                    continue;
+                }
+
+                if (emprestimos.stream().anyMatch(emprestimo -> emprestimo.getLivros().contains(isbn)) ||
+                        biblioteca.reservas.reservaExiste(isbn)) {
+                    System.out.println("Erro ao adicionar empréstimo: O livro com ISBN " + isbn + " já foi emprestado ou reservado.");
+                    continue;
+                }
+
+                livros.append(isbn).append(" ");
+                break;
+            }
+        }
 
 
 
 
-        Emprestimo emprestimo = new Emprestimo(numero, dataInicio, nif, dataPrevistaDevolucao, dataEfetivaDevolucao, livros);
+        Emprestimo emprestimo = new Emprestimo(numero, dataInicio, nif, dataPrevistaDevolucao, dataEfetivaDevolucao, livros.toString());
         emprestimos.add(emprestimo);
 
         this.storage.save(this.emprestimosPath, emprestimos);
@@ -83,7 +118,16 @@ public class Emprestimos {
                 emprestimos.get(escolha).setDataInicio(Utils.validarData("Nova data de início: "));
                 break;
             case 2:
-                emprestimos.get(escolha).setNif(Utils.ScanString("Novo Nif: "));
+                while (true) {
+                    String nif = Utils.verificarSeItemExiste("Novo NIF do Utente: ", biblioteca.utentes.getUtentes(), Utente::getNif);
+
+                    if(Utils.validarNifSemLoop(nif))
+                    {
+                        emprestimos.get(escolha).setNif(nif);
+                        break;
+                    }
+                }
+
                 break;
             case 3:
                 emprestimos.get(escolha).setDataPrevistaDevolucao(Utils.validarData("Nova data prevista de devolução: "));
