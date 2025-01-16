@@ -121,7 +121,7 @@ public class Utentes {
 
         // Percorre a lista de utentes
         for (Utente utente : utentes) {
-            System.out.println("Comparando NIF: " + utente.getNif() + " com " + nif);
+            //System.out.println("Comparando NIF: " + utente.getNif() + " com " + nif);
             if (utente.getNif().equals(nif)) {
                 return true; // Retorna true assim que encontra um NIF correspondente
             }
@@ -159,6 +159,16 @@ public class Utentes {
         String genero = partesUtente[2].split("=")[1];
         String contacto = partesUtente[3].split("=")[1];
         return new Utente(nif, nome, genero, contacto);
+    }
+
+    public String getUtenteByNif(String nif) {
+        for (Utente utente : utentes) {
+            if (utente.getNif().equals(nif)) {
+                return utente.getNome();
+            }
+        }
+        System.out.println("Utente não encontrado.");
+        return null;
     }
 
 }

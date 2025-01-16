@@ -10,7 +10,7 @@ public class MenuEmprestimos extends Menu {
 
 
     public MenuEmprestimos(Biblioteca biblioteca) {
-        super("Emprestimos", new String[]{"Adicionar", "Remover", "Listar", "Editar"}, biblioteca, true);
+        super("Emprestimos", new String[]{"Adicionar", "Remover", "Listar", "Editar", "Utentes com atraso"}, biblioteca, true);
         this.biblioteca = biblioteca;
         this.Menu();
     }
@@ -30,6 +30,9 @@ public class MenuEmprestimos extends Menu {
                 break;
             case 4:
                 biblioteca.emprestimos.AlterarEmprestimo();
+                break;
+            case 5:
+                biblioteca.emprestimos.listarUtentesComAtraso();
                 break;
             default:
                 System.out.println("opção invalida");
