@@ -87,6 +87,19 @@ public class Utils {
             }
         } while (true);
     }
+    public static String validarIsbn(String mensagem) {
+        String var;
+        do {
+            var = Utils.ScanString(mensagem);
+            if (var.isBlank()) {
+                System.out.println("Este campo é obrigatório, por favor introduza um valor válido.");
+            } else if (!var.matches("(?:\\d{9}[\\dXx]|\\d{13})")) {
+                System.out.println("Por favor, insira o ISBN no formato válido (ISBN-10 ou ISBN-13).");
+            } else {
+                return var;
+            }
+        } while (true);
+    }
 
     public static String validarData(String mensagem) {
         String data;

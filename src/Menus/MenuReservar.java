@@ -30,7 +30,8 @@ public class MenuReservar {
             System.out.println("2 - Remover Reserva");
             System.out.println("3 - Mostrar Reserva");
             System.out.println("4 - Alterar Reserva");
-            System.out.println("5 - Voltar ao Menu Principal");
+            System.out.println("5 - Converter Reserva");
+            System.out.println("6 - Voltar ao Menu Principal");
             System.out.print("Escolha uma opção: ");
 
             if (sc.hasNextInt()) {
@@ -59,11 +60,15 @@ public class MenuReservar {
                 case 4:
                     Utils.printTituloPagina("Alterar Reserva");
                     break;
-
                 case 5:
-                    System.out.println("Voltando ao Menu Principal...");
+                    Utils.printTituloPagina("Converter Reserva-Empréstimo");
+                    Reservas.converterReservaEmEmprestimo();
                     break;
 
+                case 6:
+                    System.out.println("Voltando ao Menu Principal...");
+                    Menu();
+                    break;
                 default:
                     System.out.println("Opção inválida! Por favor, escolha entre 1 e 5.");
             }

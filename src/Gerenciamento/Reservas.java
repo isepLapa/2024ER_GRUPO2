@@ -7,13 +7,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Reservas {
+
+
     Scanner sc = new Scanner(System.in);
     private List<Reserva> listaReservas = new ArrayList<>();
     private Biblioteca biblioteca;
+    private Emprestimos emprestimos;
+    private Livro livros;
 
+    // Construtor com apenas biblioteca
     public Reservas(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
+    }
 
+    public Reservas(Biblioteca biblioteca, Emprestimos emprestimos) {
+        this.biblioteca = biblioteca;
+        this.emprestimos = emprestimos;
     }
 
     public boolean addReserva() {
@@ -108,6 +117,37 @@ public class Reservas {
         return false;
     }
 
+    public boolean converterReservaEmEmprestimo() {
+        System.out.print("Digite o número da reserva que deseja converter em empréstimo: ");
+        int numeroReserva = sc.nextInt();
+        Reserva reserva = buscarReserva(numeroReserva);
+
+        if (reserva == null) {
+            System.out.println("Erro: Reserva não encontrada.");
+            return false;
+        }
+
+        if (!Livros.verificarIsbnNaLista(livros.getTitulo())) {
+            System.out.println("Erro: Livro não está disponível para empréstimo.");
+            return false;
+        }
+
+// Criação do empréstimo
+        int numeroEmprestimo = emprestimos.getEmprestimos().size() + 1;
+        String dataInicio = reserva.getDataInicio().toString();
+        String dataPrevistaDevolucao = reserva.getDataFim().toString();
+        String utente = reserva.getUtente();
+        String tituloLivro = reserva.getUtente();
+
+        Emprestimo novoEmprestimo = new Emprestimo(numeroEmprestimo, dataInicio, utente, dataPrevistaDevolucao, null,tituloLivro);
+        emprestimos.getEmprestimos().add(novoEmprestimo);
+
+// Remove a reserva da lista
+        listaReservas.remove(reserva);
+
+        System.out.println("Reserva convertida em empréstimo com sucesso!");
+        return true;
+    }
 
 }
 
